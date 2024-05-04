@@ -17,8 +17,12 @@ public class JogadorTest {
     @Test
     public void testInserirNavioValido() {
         assertTrue(jogador.inserirNavio(3, 5, 5, "horizontal"));
-        // Verifique se o navio foi inserido corretamente na posição (5,5) com tipo 3 (hidroavião) horizontalmente
-        // Faça mais verificações se necessário
+        assertTrue(jogador.inserirNavio(1, 5, 10, "horizontal"));
+        assertTrue(jogador.inserirNavio(2, 0, 0, "horizontal"));
+        assertTrue(jogador.inserirNavio(4, 9, 9, "horizontal"));
+        assertTrue(jogador.inserirNavio(5, 11, 3, "horizontal"));
+
+
     }
 
     @Test

@@ -44,11 +44,7 @@ public class Jogador {
                     matriz[linhaInicial][colunaInicial + i] = tipoNavio;
                 }
             }
-        } /*else if (orientacao.equalsIgnoreCase("vertical")) {
-            for (int i = 0; i < tamanho; i++) {
-                matriz[linhaInicial + i][colunaInicial] = tipoNavio;
-            }
-        }*/
+        }
 
         return true;
     }
