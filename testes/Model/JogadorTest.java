@@ -21,14 +21,14 @@ public class JogadorTest {
         assertTrue(jogador.inserirNavio(2, 0, 0, "horizontal"));
         assertTrue(jogador.inserirNavio(4, 9, 9, "horizontal"));
         assertTrue(jogador.inserirNavio(5, 11, 3, "horizontal"));
-
+        // Verifica inserir cada navio
 
     }
 
     @Test
     public void testInserirNavioInvalidoForaDoLimite() {
         assertFalse(jogador.inserirNavio(4, 14, 14, "horizontal"));
-        // Verifique se inserir um navio com tamanho inválido (4) ultrapassando o limite do tabuleiro retorna falso
+        // Verifica se inserir um navio com tamanho inválido (4) ultrapassando o limite do tabuleiro retorna falso
     }
 
     @Test

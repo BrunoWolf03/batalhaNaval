@@ -1,6 +1,6 @@
 package Model;
 
-public class Jogador {
+class Jogador {
     int matriz[][];
     int[][] matrizTiro;
 
@@ -21,8 +21,8 @@ public class Jogador {
 
     public boolean inserirNavio(int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
         int tamanho = tipoNavio;
-        if((tamanho>5) && (tamanho<1)) {
-            System.out.println("Esse tamanho não é valido.");
+        if ((tamanho > 5) || (tamanho < 1)) {
+            System.out.println("Esse tamanho não é válido.");
             return false;
         }
 
@@ -34,20 +34,34 @@ public class Jogador {
 
         // Insere o navio no tabuleiro
         if (orientacao.equalsIgnoreCase("horizontal")) {
-            if(tipoNavio==3) {//hidroaviao
-                matriz[linhaInicial][colunaInicial]=3;
-                matriz[linhaInicial+1][colunaInicial-1]=3;
-                matriz[linhaInicial+1][colunaInicial+1]=3;
-            }
-            else {
+            if (tipoNavio == 3) {//hidroavião
+                matriz[linhaInicial][colunaInicial] = 3;
+                matriz[linhaInicial + 1][colunaInicial - 1] = 3;
+                matriz[linhaInicial + 1][colunaInicial + 1] = 3;
+            } else {
                 for (int i = 0; i < tamanho; i++) {
                     matriz[linhaInicial][colunaInicial + i] = tipoNavio;
                 }
             }
+        } else if (orientacao.equalsIgnoreCase("vertical")) {
+            if (tipoNavio == 3) {//hidroavião
+                matriz[linhaInicial][colunaInicial] = 3;
+                matriz[linhaInicial - 1][colunaInicial + 1] = 3;
+                matriz[linhaInicial + 1][colunaInicial + 1] = 3;
+            } else {
+                for (int i = 0; i < tamanho; i++) {
+                    matriz[linhaInicial + i][colunaInicial] = tipoNavio;
+                }
+            }
+        } else {
+            System.out.println("Orientação inválida.");
+            return false;
         }
 
         return true;
     }
+
+
 
     // Verifica se a posição desejada está disponível para inserir o navio
     private boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
