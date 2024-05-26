@@ -7,6 +7,7 @@ class Jogador {
     public Jogador() {
         this.matriz = new int[15][15];
         this.matrizTiro = new int[15][15];
+        String nome;
     }
 
     public void cria_tabuleiro(){

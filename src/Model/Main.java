@@ -13,7 +13,7 @@ class Main {
 
         // Jogador 1 insere seus navios
         player1.inserirNavio(1, 0, 0, "horizontal"); // Submarino
-        player1.inserirNavio(2, 1, 1, "horizontal"); // Destroyer
+        player1.inserirNavio(2, 2, 1, "vertical"); // Destroyer
         player1.inserirNavio(3, 2, 2, "horizontal"); // Hidroavião
         player1.inserirNavio(4, 3, 3, "horizontal"); // Cruzador
         player1.inserirNavio(5, 4, 4, "horizontal"); // Couraçado

@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd179056-6b83-4318-8c10-830c4943ad6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/View/tabuleiro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Observer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Embarcacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/InserirNome.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Tabuleiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/batalhaNaval.iml" beforeDir="false" afterPath="$PROJECT_DIR$/batalhaNaval.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matriz1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriz1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matriz3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriz3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/tabuleiro.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +33,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BrunoWolf03&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BrunoWolf03/batalhaNaval.git&quot;,
+    &quot;accountId&quot;: &quot;662a1d11-d13a-41ed-9a4f-74d5c8374549&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -34,12 +56,17 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.InserirNome.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Matriz.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Tabuleiro.executor&quot;: &quot;Run&quot;,
+    &quot;Application.tabuleiro.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;JUnit.JogadorTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.RecuperaMatrizTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.SalvadorMatrizTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TiroTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.View in batalhaNaval.executor&quot;: &quot;Run&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
@@ -48,7 +75,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ProjetosJava/batalhaNaval/testes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bruno/IdeaProjects/batalhaNaval&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjetosJava/batalhaNaval/testes/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -61,9 +88,9 @@
       <recent name="D:\ProjetosJava\batalhaNaval\testes" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.tabuleiro">
-    <configuration name="tabuleiro" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="View.tabuleiro" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="InserirNome" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="View.InserirNome" />
       <module name="batalhaNaval" />
       <extension name="coverage">
         <pattern>
@@ -75,7 +102,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JogadorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.Main" />
       <module name="batalhaNaval" />
       <extension name="coverage">
         <pattern>
@@ -83,74 +111,59 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.JogadorTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RecuperaMatrizTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Matriz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="View.Matriz" />
       <module name="batalhaNaval" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Model.*" />
+          <option name="PATTERN" value="View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.RecuperaMatrizTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SalvadorMatrizTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tabuleiro" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="View.Tabuleiro" />
       <module name="batalhaNaval" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Model.*" />
+          <option name="PATTERN" value="View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.SalvadorMatrizTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TiroTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="View in batalhaNaval" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="batalhaNaval" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Model.*" />
+          <option name="PATTERN" value="View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.TiroTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="View" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.tabuleiro" />
-        <item itemvalue="JUnit.JogadorTest" />
-        <item itemvalue="JUnit.SalvadorMatrizTest" />
-        <item itemvalue="JUnit.RecuperaMatrizTest" />
-        <item itemvalue="JUnit.TiroTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Tabuleiro" />
+        <item itemvalue="Application.Matriz" />
+        <item itemvalue="Application.InserirNome" />
+        <item itemvalue="JUnit.View in batalhaNaval" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
