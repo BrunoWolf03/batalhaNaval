@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-
 class Embarcacao {
     private List<Rectangle2D.Double> cells;
     private Color color;
@@ -47,6 +46,28 @@ class Embarcacao {
             g2d.fill(cell);
             g2d.setColor(color);
             g2d.draw(cell);
+        }
+    }
+
+    public void rotate(int cellSize) {
+        double centerX = 0;
+        double centerY = 0;
+
+        // Calculate the center of the ship
+        for (Rectangle2D.Double cell : cells) {
+            centerX += cell.getX() + cellSize / 2;
+            centerY += cell.getY() + cellSize / 2;
+        }
+        centerX /= cells.size();
+        centerY /= cells.size();
+
+        // Rotate each cell around the center
+        for (Rectangle2D.Double cell : cells) {
+            double relativeX = cell.getX() - centerX + cellSize / 2;
+            double relativeY = cell.getY() - centerY + cellSize / 2;
+            double rotatedX = -relativeY;
+            double rotatedY = relativeX;
+            cell.setRect(centerX + rotatedX - cellSize / 2 , centerY + rotatedY - cellSize / 2, cellSize, cellSize);
         }
     }
 }

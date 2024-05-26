@@ -157,8 +157,11 @@ public class Tabuleiro extends JFrame {
                     repaint();
                 }
             }
-        } else if (SwingUtilities.isRightMouseButton(e) && selectedShip != null) {
-            // Implementar lógica de rotação
+        } else if (SwingUtilities.isRightMouseButton(e)) {
+            if (selectedShip != null && selectedShip.contains(x, y)) {
+                selectedShip.rotate(CELL_SIZE);
+                repaint();
+            }
         }
     }
 
@@ -168,28 +171,29 @@ public class Tabuleiro extends JFrame {
             selectedShip.setColor(originalColor);
             selectedShip = null;
             repaint();
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 1 && !isConfirming) {
-            // Exibir caixa de diálogo de confirmação
-            int result = JOptionPane.showConfirmDialog(this, "Você confirma o posicionamento de suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                isConfirming = true;
-                repaint();
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (!isConfirming) {
+                int option = JOptionPane.showConfirmDialog(this, "Confirma o posicionamento das suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    isConfirming = true;
+                }
+            } else {
+                if (currentPlayer == 1) {
+                    currentPlayer = 2;
+                    initializeShips();  // Limpa e inicializa as embarcações para o jogador 2
+                    isConfirming = false;
+                    repaint();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
+                    dispose();
+                }
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 1 && isConfirming) {
-            // Confirmar posicionamento e mudar para o jogador 2
-            currentPlayer = 2;
-            isConfirming = false;
-            initializeShips();  // Inicializar embarcações para o jogador 2
-            repaint();
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 2) {
-            // Finalizar posicionamento para o jogador 2
-            System.out.println("Todos os jogadores posicionaram suas embarcações.");
-            // Pode adicionar lógica para iniciar a fase de batalha
         }
     }
 
     private void initializeShips() {
-        ships.clear();
+        ships.clear();  // Limpar a lista de embarcações
+
         // Adicionar 4 embarcações de 1 quadrado cada de cor verde clara na lista
         int shipStartX = 50;
         int shipStartY = 50 + 4 * CELL_SIZE;
