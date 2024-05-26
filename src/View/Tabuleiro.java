@@ -20,6 +20,8 @@ public class Tabuleiro extends JFrame {
     private Embarcacao selectedShip;
     private Color originalColor;
     private boolean isShipSelected;
+    private int currentPlayer;
+    private boolean isConfirming;
 
     public Tabuleiro(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -28,30 +30,32 @@ public class Tabuleiro extends JFrame {
         ships = new ArrayList<>();
         selectedShip = null;
         isShipSelected = false;
+        currentPlayer = 1; // Começa com o jogador 1
+        isConfirming = false;
 
         setTitle("Batalha Naval");
         setSize(SIZE * CELL_SIZE + 300, SIZE * CELL_SIZE + 70);  // Dimensões da janela (aumentada a largura)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        TabuleiroPanel TabuleiroPanel = new TabuleiroPanel();
-        TabuleiroPanel.addMouseListener(new MouseAdapter() {
+        TabuleiroPanel tabuleiroPanel = new TabuleiroPanel();
+        tabuleiroPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 handleMouseClick(e);
             }
         });
-        TabuleiroPanel.addKeyListener(new KeyAdapter() {
+        tabuleiroPanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 handleKeyPress(e);
             }
         });
-        TabuleiroPanel.setFocusable(true); // Para garantir que o painel possa receber o foco do teclado
-        add(TabuleiroPanel);
+        tabuleiroPanel.setFocusable(true); // Para garantir que o painel possa receber o foco do teclado
+        add(tabuleiroPanel);
 
         // Solicite o foco do teclado para o painel
-        TabuleiroPanel.requestFocusInWindow();
+        tabuleiroPanel.requestFocusInWindow();
 
         // Inicializar embarcações
         initializeShips();
@@ -81,6 +85,7 @@ public class Tabuleiro extends JFrame {
 
             g2d.drawString("Jogador 1: " + player1Name, 10, 20);
             g2d.drawString("Jogador 2: " + player2Name, 10, 40);
+            g2d.drawString("Jogador atual: " + (currentPlayer == 1 ? player1Name : player2Name), 10, 60);
 
             // Desenhar letras no lado esquerdo
             for (int i = 0; i < SIZE; i++) {
@@ -137,7 +142,7 @@ public class Tabuleiro extends JFrame {
                 int tabuleiroWidth = SIZE * CELL_SIZE;
                 int tabuleiroHeight = SIZE * CELL_SIZE;
                 int startX = panelWidth - tabuleiroWidth - 5;
-                int startY = ((panelHeight - tabuleiroHeight) / 2)-20;
+                int startY = ((panelHeight - tabuleiroHeight) / 2) - 20;
 
                 int col = (x - startX) / CELL_SIZE;
                 int row = (y - startY) / CELL_SIZE;
@@ -163,10 +168,28 @@ public class Tabuleiro extends JFrame {
             selectedShip.setColor(originalColor);
             selectedShip = null;
             repaint();
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 1 && !isConfirming) {
+            // Exibir caixa de diálogo de confirmação
+            int result = JOptionPane.showConfirmDialog(this, "Você confirma o posicionamento de suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                isConfirming = true;
+                repaint();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 1 && isConfirming) {
+            // Confirmar posicionamento e mudar para o jogador 2
+            currentPlayer = 2;
+            isConfirming = false;
+            initializeShips();  // Inicializar embarcações para o jogador 2
+            repaint();
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && currentPlayer == 2) {
+            // Finalizar posicionamento para o jogador 2
+            System.out.println("Todos os jogadores posicionaram suas embarcações.");
+            // Pode adicionar lógica para iniciar a fase de batalha
         }
     }
 
     private void initializeShips() {
+        ships.clear();
         // Adicionar 4 embarcações de 1 quadrado cada de cor verde clara na lista
         int shipStartX = 50;
         int shipStartY = 50 + 4 * CELL_SIZE;
