@@ -18,7 +18,6 @@ public class Tabuleiro extends JFrame {
 
     private List<Embarcacao> ships;
     private Embarcacao selectedShip;
-    private Color originalColor;
     private boolean isShipSelected;
     private int currentPlayer;
     private boolean isConfirming;
@@ -111,10 +110,10 @@ public class Tabuleiro extends JFrame {
             }
 
             if (selectedShip != null) {
-                g2d.setColor(Color.GRAY);
+                g2d.setColor(selectedShip.getColor());
                 for (Rectangle2D.Double cell : selectedShip.getCells()) {
                     g2d.fill(cell);
-                    g2d.setColor(Color.GRAY);
+                    g2d.setColor(selectedShip.getColor());
                     g2d.draw(cell);
                 }
             }
@@ -130,7 +129,6 @@ public class Tabuleiro extends JFrame {
                 for (Embarcacao ship : ships) {
                     if (ship.contains(x, y)) {
                         selectedShip = ship;
-                        originalColor = ship.getColor();
                         isShipSelected = true;
                         repaint();
                         break;
@@ -152,14 +150,27 @@ public class Tabuleiro extends JFrame {
                     double dy = startY + row * CELL_SIZE - selectedShip.getCells().get(0).getY();
                     selectedShip.move(dx, dy);
                     isShipSelected = false;
-                    selectedShip.setColor(originalColor);
                     selectedShip = null;
                     repaint();
                 }
             }
         } else if (SwingUtilities.isRightMouseButton(e)) {
-            if (selectedShip != null && selectedShip.contains(x, y)) {
-                selectedShip.rotate(CELL_SIZE);
+            if (!isShipSelected) {
+                for (Embarcacao ship : ships) {
+                    if (ship.contains(x, y)) {
+                        selectedShip = ship;
+                        break;
+                    }
+                }
+            }
+
+            if (selectedShip != null) {
+                // Ponto de ancoragem: extremidade esquerda da embarcação (primeira célula)
+                Rectangle2D.Double anchorCell = selectedShip.getCells().get(0);
+                double anchorX = anchorCell.getX();
+                double anchorY = anchorCell.getY();
+
+                selectedShip.rotate(anchorX, anchorY, CELL_SIZE);
                 repaint();
             }
         }
@@ -168,7 +179,6 @@ public class Tabuleiro extends JFrame {
     private void handleKeyPress(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && selectedShip != null) {
             isShipSelected = false;
-            selectedShip.setColor(originalColor);
             selectedShip = null;
             repaint();
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -176,16 +186,15 @@ public class Tabuleiro extends JFrame {
                 int option = JOptionPane.showConfirmDialog(this, "Confirma o posicionamento das suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     isConfirming = true;
-                }
-            } else {
-                if (currentPlayer == 1) {
-                    currentPlayer = 2;
-                    initializeShips();  // Limpa e inicializa as embarcações para o jogador 2
-                    isConfirming = false;
-                    repaint();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
-                    dispose();
+                    if (currentPlayer == 1) {
+                        currentPlayer = 2;
+                        initializeShips();  // Limpa e inicializa as embarcações para o jogador 2
+                        isConfirming = false;
+                        repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
+                        dispose();
+                    }
                 }
             }
         }
