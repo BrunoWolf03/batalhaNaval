@@ -49,25 +49,13 @@ class Embarcacao {
         }
     }
 
-    public void rotate(int cellSize) {
-        double centerX = 0;
-        double centerY = 0;
-
-        // Calculate the center of the ship
+    public void rotate(double anchorX, double anchorY, int cellSize) {
         for (Rectangle2D.Double cell : cells) {
-            centerX += cell.getX() + cellSize / 2;
-            centerY += cell.getY() + cellSize / 2;
-        }
-        centerX /= cells.size();
-        centerY /= cells.size();
-
-        // Rotate each cell around the center
-        for (Rectangle2D.Double cell : cells) {
-            double relativeX = cell.getX() - centerX + cellSize / 2;
-            double relativeY = cell.getY() - centerY + cellSize / 2;
+            double relativeX = cell.getX() - anchorX;
+            double relativeY = cell.getY() - anchorY;
             double rotatedX = -relativeY;
             double rotatedY = relativeX;
-            cell.setRect(centerX + rotatedX - cellSize / 2 , centerY + rotatedY - cellSize / 2, cellSize, cellSize);
+            cell.setRect(anchorX + rotatedX, anchorY + rotatedY, cellSize, cellSize);
         }
     }
 }
