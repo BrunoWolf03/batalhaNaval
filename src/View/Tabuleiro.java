@@ -1,5 +1,8 @@
 package View;
 
+import Controller.Controller;
+import Model.Jogador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,8 +13,8 @@ import java.util.List;
 import static java.awt.Color.WHITE;
 
 public class Tabuleiro extends JFrame {
-    private static final int SIZE = 15;  // Tamanho do tabuleiro
-    private static final int CELL_SIZE = 30;  // Tamanho de cada célula
+    public static final int SIZE = 15;
+    public static final int CELL_SIZE = 30;
 
     private String player1Name;
     private String player2Name;
@@ -22,9 +25,13 @@ public class Tabuleiro extends JFrame {
     private int currentPlayer;
     private boolean isConfirming;
 
-    public Tabuleiro(String player1Name, String player2Name) {
+    private Controller controller;
+
+    public Tabuleiro(String player1Name, String player2Name, Controller controller) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
+        this.controller = controller;
+        controller.setTabuleiro(this);
 
         ships = new ArrayList<>();
         selectedShip = null;
@@ -33,7 +40,7 @@ public class Tabuleiro extends JFrame {
         isConfirming = false;
 
         setTitle("Batalha Naval");
-        setSize(SIZE * CELL_SIZE + 300, SIZE * CELL_SIZE + 70);  // Dimensões da janela (aumentada a largura)
+        setSize(SIZE * CELL_SIZE + 300, SIZE * CELL_SIZE + 70);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -50,18 +57,14 @@ public class Tabuleiro extends JFrame {
                 handleKeyPress(e);
             }
         });
-        tabuleiroPanel.setFocusable(true); // Para garantir que o painel possa receber o foco do teclado
+        tabuleiroPanel.setFocusable(true);
         add(tabuleiroPanel);
-
-        // Solicite o foco do teclado para o painel
         tabuleiroPanel.requestFocusInWindow();
 
-        // Inicializar embarcações
         initializeShips();
     }
 
     private class TabuleiroPanel extends JPanel {
-
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
@@ -71,11 +74,8 @@ public class Tabuleiro extends JFrame {
             int tabuleiroWidth = SIZE * CELL_SIZE;
             int tabuleiroHeight = SIZE * CELL_SIZE;
 
-            // Calcula as coordenadas para centralizar o tabuleiro no lado direito
-            int startX = panelWidth - tabuleiroWidth - 20;  // 20 pixels de margem da borda direita
-            int startY = (panelHeight - tabuleiroHeight) / 2;
-
-            // Desenhar números na parte superior
+            int startX = getBoardStartX();
+            int startY = getBoardStartY();
             for (int j = 0; j < SIZE; j++) {
                 String num = Integer.toString(j + 1);
                 int numWidth = g2d.getFontMetrics().stringWidth(num);
@@ -86,25 +86,22 @@ public class Tabuleiro extends JFrame {
             g2d.drawString("Jogador 2: " + player2Name, 10, 40);
             g2d.drawString("Jogador atual: " + (currentPlayer == 1 ? player1Name : player2Name), 10, 60);
 
-            // Desenhar letras no lado esquerdo
             for (int i = 0; i < SIZE; i++) {
                 char letter = (char) ('A' + i);
                 int letterHeight = g2d.getFontMetrics().getAscent();
                 g2d.drawString(Character.toString(letter), startX - 20, startY + i * CELL_SIZE + (CELL_SIZE + letterHeight) / 2);
             }
 
-            // Desenhar células do tabuleiro
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     Rectangle2D.Double cell = new Rectangle2D.Double(startX + j * CELL_SIZE, startY + i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                    g2d.setColor(WHITE);  // Cor do preenchimento da célula
-                    g2d.fill(cell);  // Preencher a célula
-                    g2d.setColor(Color.BLACK);  // Cor do contorno da célula
-                    g2d.draw(cell);  // Desenhar o contorno da célula
+                    g2d.setColor(WHITE);
+                    g2d.fill(cell);
+                    g2d.setColor(Color.BLACK);
+                    g2d.draw(cell);
                 }
             }
 
-            // Desenhar as embarcações
             for (Embarcacao ship : ships) {
                 ship.draw(g2d);
             }
@@ -118,6 +115,18 @@ public class Tabuleiro extends JFrame {
                 }
             }
         }
+    }
+
+    public int getBoardStartX() {
+        int panelWidth = getWidth();
+        int tabuleiroWidth = SIZE * CELL_SIZE;
+        return panelWidth - tabuleiroWidth - 20;
+    }
+
+    public int getBoardStartY() {
+        int panelHeight = getHeight();
+        int tabuleiroHeight = SIZE * CELL_SIZE;
+        return (panelHeight - tabuleiroHeight) / 2;
     }
 
     private void handleMouseClick(MouseEvent e) {
@@ -139,8 +148,8 @@ public class Tabuleiro extends JFrame {
                 int panelHeight = getHeight();
                 int tabuleiroWidth = SIZE * CELL_SIZE;
                 int tabuleiroHeight = SIZE * CELL_SIZE;
-                int startX = panelWidth - tabuleiroWidth - 5;
-                int startY = ((panelHeight - tabuleiroHeight) / 2) - 20;
+                int startX = panelWidth - tabuleiroWidth +10 ;
+                int startY = ((panelHeight - tabuleiroHeight) / 2) ;
 
                 int col = (x - startX) / CELL_SIZE;
                 int row = (y - startY) / CELL_SIZE;
@@ -200,21 +209,29 @@ public class Tabuleiro extends JFrame {
         }
     }
 
-    private void initializeShips() {
-        ships.clear();  // Limpar a lista de embarcações
+    public boolean isShipSelected() {
+        return isShipSelected;
+    }
 
-        // Adicionar 4 embarcações de 1 quadrado cada de cor verde clara na lista
+    public void deselectShip() {
+        isShipSelected = false;
+        selectedShip = null;
+        repaint();
+    }
+
+    public void initializeShips() {
+        ships.clear();
+
         int shipStartX = 50;
-        int shipStartY = 50 + 4 * CELL_SIZE;
+        int shipStartY = 100;
         for (int i = 0; i < 4; i++) {
+            List<Rectangle2D.Double> cells = new ArrayList<>();
             int x = shipStartX + i * 2 * CELL_SIZE;
             int y = shipStartY;
-            List<Rectangle2D.Double> cells = new ArrayList<>();
             cells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
             ships.add(new Embarcacao(cells, new Color(144, 238, 144)));
         }
 
-        // Adicionar 3 embarcações de 2 quadrados cada de cor amarela na lista
         for (int i = 0; i < 3; i++) {
             List<Rectangle2D.Double> cells = new ArrayList<>();
             for (int j = 0; j < 2; j++) {
@@ -225,7 +242,6 @@ public class Tabuleiro extends JFrame {
             ships.add(new Embarcacao(cells, Color.YELLOW));
         }
 
-        // Adicionar 2 embarcações de 4 quadrados cada de cor laranja na lista
         for (int i = 0; i < 2; i++) {
             List<Rectangle2D.Double> cells = new ArrayList<>();
             for (int j = 0; j < 4; j++) {
@@ -236,7 +252,6 @@ public class Tabuleiro extends JFrame {
             ships.add(new Embarcacao(cells, Color.ORANGE));
         }
 
-        // Adicionar 1 embarcação de 5 quadrados de cor vermelha na lista
         List<Rectangle2D.Double> redShipCells = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
             int x = shipStartX + j * CELL_SIZE;
@@ -245,7 +260,6 @@ public class Tabuleiro extends JFrame {
         }
         ships.add(new Embarcacao(redShipCells, Color.PINK));
 
-        // Adicionar 5 embarcações de hidroaviões (estrutura em T) na lista
         for (int i = 0; i < 5; i++) {
             List<Rectangle2D.Double> cells = new ArrayList<>();
             int baseX = shipStartX + i * (3 * CELL_SIZE + CELL_SIZE);
@@ -260,13 +274,5 @@ public class Tabuleiro extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame panel = null;
-            InserirNome gui = new InserirNome(panel);
-            gui.setVisible(true);
-            Tabuleiro gui2 = new Tabuleiro(gui.nome1, gui.nome2);
-            gui2.setVisible(true);
-        });
-    }
+
 }

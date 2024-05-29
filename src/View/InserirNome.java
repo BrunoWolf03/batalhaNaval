@@ -1,51 +1,40 @@
 package View;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing. *;
+import java.awt. *;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class InserirNome extends JDialog {
-    private JTextField player1NameField;
-    private JTextField player2NameField;
-    private JButton startButton;
+public class InserirNome extends JDialog {
     public String nome1;
     public String nome2;
 
-    public InserirNome(JFrame parent) {
-        super(parent, "Nomes dos Jogadores", true);
-        setSize(300, 200);
-        setLocationRelativeTo(parent);
+    public InserirNome(JFrame frame) {
+        super(frame, "Inserir Nomes dos Jogadores", true);
 
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
+        setLayout(new GridLayout(3, 2));
 
-        panel.add(new JLabel("Nome do Jogador 1:"));
-        player1NameField = new JTextField();
-        panel.add(player1NameField);
+        JLabel label1 = new JLabel("Nome do Jogador 1:");
+        JTextField textField1 = new JTextField();
+        JLabel label2 = new JLabel("Nome do Jogador 2:");
+        JTextField textField2 = new JTextField();
 
-        panel.add(new JLabel("Nome do Jogador 2:"));
-        player2NameField = new JTextField();
-        panel.add(player2NameField);
+        add(label1);
+        add(textField1);
+        add(label2);
+        add(textField2);
 
-        startButton = new JButton("Iniciar Jogo");
-        startButton.addActionListener(new ActionListener() {
-            @Override
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String player1Name = player1NameField.getText().trim();
-                nome1 = player1NameField.getText().trim();
-                String player2Name = player2NameField.getText().trim();
-                nome2 = player2NameField.getText().trim();
-                if (!player1Name.isEmpty() && !player2Name.isEmpty()) {
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(InserirNome.this, "Por favor, insira os nomes de ambos os jogadores.");
-                }
+                nome1 = textField1.getText();
+                nome2 = textField2.getText();
+                setVisible(false);
             }
         });
+        add(okButton);
 
-        panel.add(new JLabel());
-        panel.add(startButton);
-
-        add(panel);
+        setSize(300, 150);
+        setLocationRelativeTo(frame);
     }
 }
