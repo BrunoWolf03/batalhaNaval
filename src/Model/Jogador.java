@@ -6,11 +6,13 @@ public class Jogador extends Observable {
     int matriz[][];
     int[][] matrizTiro;
     public String nome;
+    private Tiro tiros;
 
     public Jogador() {
         this.matriz = new int[15][15];
         this.matrizTiro = new int[15][15];
         cria_tabuleiro();
+        this.tiros = new Tiro(15);
     }
 
     public void cria_tabuleiro() {
@@ -135,5 +137,18 @@ public class Jogador extends Observable {
         this.matriz = new int[15][15];
         setChanged();
         notifyObservers();
+    }
+
+    public int registrarTiro(int linha, int coluna) {
+        int resultado = tiros.atirar(getMatriz(), linha, coluna);
+        if (resultado != -1) {
+            setChanged();
+            notifyObservers();
+        }
+        return resultado;
+    }
+
+    public boolean[][] getTiros() {
+        return tiros.getTiros();
     }
 }

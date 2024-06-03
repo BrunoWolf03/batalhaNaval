@@ -2,6 +2,12 @@ package Model;
 
 class Tiro {
 
+    private boolean[][] tiros;
+
+    public Tiro(int tamanho) {
+        this.tiros = new boolean[tamanho][tamanho];
+    }
+
     int atirar(int matriz[][], int linha, int coluna) {
         if(matriz[linha][coluna]>0) {
             if(matriz[linha][coluna]==1) {
@@ -39,6 +45,10 @@ class Tiro {
             System.out.println("Tentou acertar um lugar já atirado");
             return -1;
         }
+    }
+
+    public boolean[][] getTiros() {
+        return tiros;
     }
 
 }

@@ -17,20 +17,22 @@ public class Controller implements Observer {
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
     public int currentPlayer;
+    private Jogador jogadorAtual;
+    private Jogador jogadorAdversario;
 
     public Controller(Jogador jogador1, Jogador jogador2) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
         jogador1.addObserver(this);
         jogador2.addObserver(this);
+        jogadorAtual = jogador1; // Começa com o jogador 1
+        jogadorAdversario = jogador2;
         currentPlayer = 1;
     }
 
     public void setTabuleiro(Tabuleiro tabuleiro) {
         this.tabuleiro = tabuleiro;
     }
-
-
 
     @Override
     public void update(Observable o, Object arg) {
@@ -56,6 +58,30 @@ public class Controller implements Observer {
         }
     }
 
+    public void setJogadorAtual(int jogador) {
+        if (jogador == 1) {
+            jogadorAtual = jogador1;
+            jogadorAdversario = jogador2;
+        } else {
+            jogadorAtual = jogador2;
+            jogadorAdversario = jogador1;
+        }
+    }
+
+    public int registrarTiro(int linha, int coluna) {
+        return jogadorAdversario.registrarTiro(linha, coluna);
+    }
+
+    public boolean[][] getTiros(int currentPlayer) {
+        Jogador jogador = currentPlayer == 1 ? jogador1 : jogador2;
+        return jogador.getTiros();
+    }
+
+    public int[][] getTabuleiro(int currentPlayer) {
+        Jogador jogador = currentPlayer == 1 ? jogador1 : jogador2;
+        return jogador.getMatriz();
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame panel = new JFrame();
@@ -77,7 +103,7 @@ public class Controller implements Observer {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         SwingUtilities.invokeLater(() -> {
-                            TabuleiroTiro gui2 = new TabuleiroTiro(jogador1.nome, jogador2.nome);
+                            TabuleiroTiro gui2 = new TabuleiroTiro(jogador1.nome, jogador2.nome, controller);
                             gui2.setVisible(true);
                         });
                     }
@@ -88,7 +114,4 @@ public class Controller implements Observer {
         });
 
     }
-
-
-
 }
