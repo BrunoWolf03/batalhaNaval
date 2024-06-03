@@ -39,8 +39,8 @@ public class Jogador extends Observable {
         if (orientacao.equalsIgnoreCase("horizontal")) {
             if (tipoNavio == 3) {
                 matriz[linhaInicial][colunaInicial] = 3;
-                matriz[linhaInicial + 1][colunaInicial - 1] = 3;
-                matriz[linhaInicial + 1][colunaInicial + 1] = 3;
+                matriz[linhaInicial -1 ][colunaInicial + 1] = 3;
+                matriz[linhaInicial ][colunaInicial + 2] = 3;
             } else {
                 for (int i = 0; i < tamanho; i++) {
                     matriz[linhaInicial][colunaInicial + i] = tipoNavio;
@@ -49,8 +49,8 @@ public class Jogador extends Observable {
         } else if (orientacao.equalsIgnoreCase("vertical")) {
             if (tipoNavio == 3) {
                 matriz[linhaInicial][colunaInicial] = 3;
-                matriz[linhaInicial - 1][colunaInicial + 1] = 3;
-                matriz[linhaInicial + 1][colunaInicial + 1] = 3;
+                matriz[linhaInicial + 1 ][colunaInicial + 1] = 3;
+                matriz[linhaInicial + 2][colunaInicial ] = 3;
             } else {
                 for (int i = 0; i < tamanho; i++) {
                     matriz[linhaInicial + i][colunaInicial] = tipoNavio;
@@ -67,49 +67,54 @@ public class Jogador extends Observable {
     }
 
     private boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
-        if (tamanho == 3) {
-            if ((linhaInicial == 0) || (colunaInicial == 0) || (linhaInicial == 15) || (colunaInicial == 15)) {
-                System.out.println("Nao pode colocar hidroaviao na borda.");
-                return false;
-            }
-            if (colunaInicial + tamanho > 15) {
-                return false;
-            }
+        if((linhaInicial <0 ) || (linhaInicial>15) || (colunaInicial>15) || (colunaInicial <0 )) {
+            return false;
         }
-        if (orientacao.equalsIgnoreCase("horizontal")) {
-            if (colunaInicial + tamanho > 15) {
-                return false;
-            }
-            for (int i = 0; i < tamanho; i++) {
-                if (matriz[linhaInicial][colunaInicial + i] != 0) {
+        else{
+            if (tamanho == 3) {
+                if ((linhaInicial == 0) || (colunaInicial == 0) || (linhaInicial == 15) || (colunaInicial == 15)) {
+                    System.out.println("Nao pode colocar hidroaviao na borda.");
+                    return false;
+                }
+                if (colunaInicial + tamanho > 15) {
                     return false;
                 }
             }
-        } else if (orientacao.equalsIgnoreCase("vertical")) {
-            if (linhaInicial + tamanho > 15) {
-                return false;
-            }
-            for (int i = 0; i < tamanho; i++) {
-                if (matriz[linhaInicial + i][colunaInicial] != 0) {
+            if (orientacao.equalsIgnoreCase("horizontal")) {
+                if (colunaInicial + tamanho > 15) {
                     return false;
                 }
+                for (int i = 0; i < tamanho; i++) {
+                    if (matriz[linhaInicial][colunaInicial + i] != 0) {
+                        return false;
+                    }
+                }
+            } else if (orientacao.equalsIgnoreCase("vertical")) {
+                if (linhaInicial + tamanho > 15) {
+                    return false;
+                }
+                for (int i = 0; i < tamanho; i++) {
+                    if (matriz[linhaInicial + i][colunaInicial] != 0) {
+                        return false;
+                    }
+                }
             }
-        }
-        for (int i = 0; i < tamanho; i++) {
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 3; k++) {
-                    if ((linhaInicial - 1 + j > 15) || (colunaInicial - 1 + k > 15) || (linhaInicial - 1 + j < 0) || (colunaInicial - 1 + k < 0)) {
-                        System.out.println("Esta fora da matriz");
-                    } else {
-                        if (matriz[linhaInicial - 1 + j][colunaInicial - 1 + k] != 0) {
-                            return false;
+            for (int i = 0; i < tamanho; i++) {
+                for (int j = 0; j < 3; j++) {
+                    for (int k = 0; k < 3; k++) {
+                        if ((linhaInicial - 1 + j > 15) || (colunaInicial - 1 + k > 15) || (linhaInicial - 1 + j < 0) || (colunaInicial - 1 + k < 0)) {
+                            System.out.println("Esta fora da matriz");
+                        } else {
+                            if (matriz[linhaInicial - 1 + j][colunaInicial - 1 + k] != 0) {
+                                return false;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        return true;
+            return true;
+        }
     }
 
     public int[][] getMatriz() {
@@ -124,5 +129,11 @@ public class Jogador extends Observable {
 
     public void salvarMatrizEmArquivo(String caminhoArquivo) {
         SalvadorMatriz.salvarMatriz(matriz, caminhoArquivo);
+    }
+
+    public void resetTabuleiro() {
+        this.matriz = new int[15][15];
+        setChanged();
+        notifyObservers();
     }
 }

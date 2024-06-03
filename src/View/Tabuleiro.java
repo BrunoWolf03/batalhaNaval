@@ -1,7 +1,6 @@
 package View;
 
 import Controller.Controller;
-import Model.Jogador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +30,7 @@ public class Tabuleiro extends JFrame {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.controller = controller;
-        controller.setTabuleiro(this);
+        this.controller.setTabuleiro(this);
 
         ships = new ArrayList<>();
         selectedShip = null;
@@ -109,8 +108,9 @@ public class Tabuleiro extends JFrame {
             if (selectedShip != null) {
                 g2d.setColor(selectedShip.getColor());
                 for (Rectangle2D.Double cell : selectedShip.getCells()) {
-                    g2d.fill(cell);
                     g2d.setColor(selectedShip.getColor());
+                    g2d.fill(cell);
+                    g2d.setColor(Color.BLACK);
                     g2d.draw(cell);
                 }
             }
@@ -139,17 +139,14 @@ public class Tabuleiro extends JFrame {
                     if (ship.contains(x, y)) {
                         selectedShip = ship;
                         isShipSelected = true;
+                        selectedShip.setErrored(false); // Reset error flag when selecting a ship
                         repaint();
                         break;
                     }
                 }
             } else {
-                int panelWidth = getWidth();
-                int panelHeight = getHeight();
-                int tabuleiroWidth = SIZE * CELL_SIZE;
-                int tabuleiroHeight = SIZE * CELL_SIZE;
-                int startX = panelWidth - tabuleiroWidth +10 ;
-                int startY = ((panelHeight - tabuleiroHeight) / 2) ;
+                int startX = getBoardStartX();
+                int startY = getBoardStartY();
 
                 int col = (x - startX) / CELL_SIZE;
                 int row = (y - startY) / CELL_SIZE;
@@ -186,27 +183,81 @@ public class Tabuleiro extends JFrame {
     }
 
     private void handleKeyPress(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && selectedShip != null) {
-            isShipSelected = false;
-            selectedShip = null;
-            repaint();
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (!isConfirming) {
-                int option = JOptionPane.showConfirmDialog(this, "Confirma o posicionamento das suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
-                if (option == JOptionPane.YES_OPTION) {
-                    isConfirming = true;
-                    if (currentPlayer == 1) {
-                        currentPlayer = 2;
-                        initializeShips();  // Limpa e inicializa as embarcações para o jogador 2
-                        isConfirming = false;
-                        repaint();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
-                        dispose();
+                if (selectedShip != null) {
+                    isShipSelected = false;
+                    selectedShip.setErrored(false); // Reset error flag when deselecting a ship
+                    selectedShip = null;
+                    repaint();
+                } else {
+                    int option = JOptionPane.showConfirmDialog(this, "Confirma o posicionamento das suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) {
+                        isConfirming = true;
+                        if (!enviarNaviosParaController()) {
+                            JOptionPane.showMessageDialog(this, "Erro ao inserir navio. Tente novamente.");
+                            isConfirming = false;
+                            controller.resetJogadorTabuleiro(currentPlayer);
+                        } else {
+                            if (currentPlayer == 1) {
+                                currentPlayer = 2;
+                                initializeShips();  // Limpa e inicializa as embarcações para o jogador 2
+                                isConfirming = false;
+                                repaint();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
+                                dispose();
+                            }
+                        }
                     }
                 }
             }
         }
+    }
+
+    private boolean enviarNaviosParaController() {
+        int startX = getBoardStartX();
+        int startY = getBoardStartY();
+
+        for (Embarcacao ship : ships) {
+            ship.setErrored(false); // Reset error flag before checking
+            String coordenadaInicial = ship.getCoordenadaInicial(startX, startY);
+            int[] coordenada = converterCoordenada(coordenadaInicial);
+            if (coordenada != null) {
+                String orientacao = ship.getOrientacao() == 0 ? "horizontal" : "vertical";
+                if (!controller.inserirNavio(currentPlayer, ship.getTipoNavio(), coordenada[0], coordenada[1], orientacao)) {
+                    ship.setErrored(true); // Marcar navio com erro
+                    selectedShip = ship;
+                    repaint();
+                    return false; // Falha ao inserir navio
+                }
+            } else {
+                ship.setErrored(true); // Marcar navio com erro
+                selectedShip = ship;
+                repaint();
+                return false; // Coordenada inválida
+            }
+        }
+        repaint();
+        return true; // Todos os navios foram inseridos corretamente
+    }
+
+    private int[] converterCoordenada(String coordenada) {
+        if (coordenada.length() < 2) {
+            return null;
+        }
+
+        char letra = coordenada.charAt(0);
+        int linha = Character.toUpperCase(letra) - 'A';
+        int coluna;
+
+        try {
+            coluna = Integer.parseInt(coordenada.substring(1)) - 1;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+
+        return new int[]{linha, coluna};
     }
 
     public boolean isShipSelected() {
@@ -215,6 +266,9 @@ public class Tabuleiro extends JFrame {
 
     public void deselectShip() {
         isShipSelected = false;
+        if (selectedShip != null) {
+            selectedShip.setErrored(false); // Reset error flag when deselecting a ship
+        }
         selectedShip = null;
         repaint();
     }
@@ -229,7 +283,7 @@ public class Tabuleiro extends JFrame {
             int x = shipStartX + i * 2 * CELL_SIZE;
             int y = shipStartY;
             cells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
-            ships.add(new Embarcacao(cells, new Color(144, 238, 144)));
+            ships.add(new Embarcacao(cells, new Color(144, 238, 144), 1));
         }
 
         for (int i = 0; i < 3; i++) {
@@ -239,7 +293,7 @@ public class Tabuleiro extends JFrame {
                 int y = shipStartY + CELL_SIZE * 2;
                 cells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
             }
-            ships.add(new Embarcacao(cells, Color.YELLOW));
+            ships.add(new Embarcacao(cells, Color.YELLOW, 2));
         }
 
         for (int i = 0; i < 2; i++) {
@@ -249,7 +303,7 @@ public class Tabuleiro extends JFrame {
                 int y = shipStartY + CELL_SIZE * 4;
                 cells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
             }
-            ships.add(new Embarcacao(cells, Color.ORANGE));
+            ships.add(new Embarcacao(cells, Color.ORANGE, 4));
         }
 
         List<Rectangle2D.Double> redShipCells = new ArrayList<>();
@@ -258,7 +312,7 @@ public class Tabuleiro extends JFrame {
             int y = shipStartY + CELL_SIZE * 6;
             redShipCells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
         }
-        ships.add(new Embarcacao(redShipCells, Color.PINK));
+        ships.add(new Embarcacao(redShipCells, Color.PINK, 5));
 
         for (int i = 0; i < 5; i++) {
             List<Rectangle2D.Double> cells = new ArrayList<>();
@@ -270,9 +324,7 @@ public class Tabuleiro extends JFrame {
                 int y = baseY + coord[1] * CELL_SIZE;
                 cells.add(new Rectangle2D.Double(x, y, CELL_SIZE, CELL_SIZE));
             }
-            ships.add(new Embarcacao(cells, Color.BLUE));
+            ships.add(new Embarcacao(cells, Color.BLUE, 3));
         }
     }
-
-
 }

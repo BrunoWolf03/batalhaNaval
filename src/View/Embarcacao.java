@@ -4,13 +4,19 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-class Embarcacao {
+public class Embarcacao {
     private List<Rectangle2D.Double> cells;
     private Color color;
+    private int tipoNavio;
+    private int orientacao; // 0 para horizontal, 1 para vertical
+    private boolean isErrored; // Flag para marcar erro
 
-    public Embarcacao(List<Rectangle2D.Double> cells, Color color) {
+    public Embarcacao(List<Rectangle2D.Double> cells, Color color, int tipoNavio) {
         this.cells = cells;
         this.color = color;
+        this.tipoNavio = tipoNavio;
+        this.orientacao = 0; // Inicia com horizontal
+        this.isErrored = false; // Inicialmente não está com erro
     }
 
     public List<Rectangle2D.Double> getCells() {
@@ -18,11 +24,37 @@ class Embarcacao {
     }
 
     public Color getColor() {
-        return color;
+        return isErrored ? Color.RED : color; // Retorna vermelho se houver erro
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public int getTipoNavio() {
+        return tipoNavio;
+    }
+
+    public int getOrientacao() {
+        return orientacao;
+    }
+
+    public void setOrientacao(int orientacao) {
+        this.orientacao = orientacao;
+    }
+
+    public String getCoordenadaInicial(int startX, int startY) {
+        Rectangle2D.Double firstCell = cells.get(0);
+        int col = (int) ((firstCell.getX() - startX) / Tabuleiro.CELL_SIZE);
+        int row = (int) ((firstCell.getY() - startY) / Tabuleiro.CELL_SIZE);
+        char letter = (char) ('A' + row);
+        int number = col + 1;
+        return "" + letter + number;
+    }
+
+    public void draw(Graphics2D g2d) {
+        g2d.setColor(getColor());
+        for (Rectangle2D.Double cell : cells) {
+            g2d.fill(cell);
+            g2d.setColor(getColor());
+            g2d.draw(cell);
+        }
     }
 
     public boolean contains(double x, double y) {
@@ -40,22 +72,23 @@ class Embarcacao {
         }
     }
 
-    public void draw(Graphics2D g2d) {
-        g2d.setColor(color);
-        for (Rectangle2D.Double cell : cells) {
-            g2d.fill(cell);
-            g2d.setColor(color);
-            g2d.draw(cell);
-        }
-    }
-
-    public void rotate(double anchorX, double anchorY, int cellSize) {
+    public void rotate(double anchorX, double anchorY, double cellSize) {
         for (Rectangle2D.Double cell : cells) {
             double relativeX = cell.getX() - anchorX;
             double relativeY = cell.getY() - anchorY;
-            double rotatedX = -relativeY;
-            double rotatedY = relativeX;
-            cell.setRect(anchorX + rotatedX, anchorY + rotatedY, cellSize, cellSize);
+            double newRelativeX = -relativeY;
+            double newRelativeY = relativeX;
+            cell.setRect(anchorX + newRelativeX, anchorY + newRelativeY, cellSize, cellSize);
         }
+        // Alterna a orientação
+        orientacao = (orientacao + 1) % 2;
+    }
+
+    public void setErrored(boolean errored) {
+        isErrored = errored;
+    }
+
+    public boolean isErrored() {
+        return isErrored;
     }
 }

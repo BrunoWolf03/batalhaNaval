@@ -17,7 +17,6 @@ public class Controller implements Observer {
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
     public int currentPlayer;
-    private boolean isConfirming;
 
     public Controller(Jogador jogador1, Jogador jogador2) {
         this.jogador1 = jogador1;
@@ -25,7 +24,6 @@ public class Controller implements Observer {
         jogador1.addObserver(this);
         jogador2.addObserver(this);
         currentPlayer = 1;
-        //isConfirming = false;
     }
 
     public void setTabuleiro(Tabuleiro tabuleiro) {
@@ -33,38 +31,29 @@ public class Controller implements Observer {
     }
 
 
-    /*
-    public void handleKeyPress(int keyCode) {
-        if (keyCode == KeyEvent.VK_ESCAPE) {
-            if (tabuleiro.isShipSelected()) {
-                tabuleiro.deselectShip();
-            } else {
-                if (!isConfirming) {
-                    jogador1.cria_tabuleiro();
-                    int option = JOptionPane.showConfirmDialog(tabuleiro, "Confirma o posicionamento das suas embarcações?", "Confirmação", JOptionPane.YES_NO_OPTION);
-                    if (option == JOptionPane.YES_OPTION) {
-                        isConfirming = true;
-                        if (currentPlayer == 1) {
-                            currentPlayer = 2;
-                            tabuleiro.initializeShips();
-                            jogador2.cria_tabuleiro(); // Reseta a matriz do jogador 2
-                            isConfirming = false;
-                            tabuleiro.repaint();
-                        } else {
-                            JOptionPane.showMessageDialog(tabuleiro, "Ambos os jogadores posicionaram suas embarcações. O jogo pode começar!");
-                            tabuleiro.dispose();
-                        }
-                    }
-                }
-            }
-        }
-    }
-     */
-
 
     @Override
     public void update(Observable o, Object arg) {
-        tabuleiro.repaint();
+        if (tabuleiro != null) {
+            tabuleiro.repaint();
+        }
+    }
+
+    public boolean inserirNavio(int currentPlayer, int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
+        if (currentPlayer == 1) {
+            jogador1.salvarMatrizEmArquivo("matriznova1.txt");
+            return jogador1.inserirNavio(tipoNavio, linhaInicial, colunaInicial, orientacao);
+        } else {
+            jogador2.salvarMatrizEmArquivo("matriznova2.txt");
+            return jogador2.inserirNavio(tipoNavio, linhaInicial, colunaInicial, orientacao);
+        }
+    }
+    public void resetJogadorTabuleiro(int currentPlayer) {
+        if (currentPlayer == 1) {
+            jogador1.resetTabuleiro();
+        } else {
+            jogador2.resetTabuleiro();
+        }
     }
 
     public static void main(String[] args) {
@@ -97,6 +86,7 @@ public class Controller implements Observer {
                 System.out.println("Nomes dos jogadores não inseridos corretamente.");
             }
         });
+
     }
 
 
