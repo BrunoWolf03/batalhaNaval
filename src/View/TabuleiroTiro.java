@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
-import java.util.HashSet;
-import java.util.Set;
 
 import static java.awt.Color.WHITE;
 
@@ -131,7 +129,7 @@ public class TabuleiroTiro extends JFrame {
                     g2d.draw(cell);  // Desenhar o contorno da célula
 
                     if (shots[i][j]) {
-                        if (embarcacoes[i][j] < 0) {
+                        if (embarcacoes[i][j] > 0) {
                             g2d.setColor(Color.RED); // Tiro que acertou uma embarcação
                         } else if (embarcacoes[i][j] == -10) {
                             g2d.setColor(Color.BLUE); // Tiro na água
@@ -154,24 +152,32 @@ public class TabuleiroTiro extends JFrame {
             int x = e.getX();
             int y = e.getY();
 
-            int panelWidth = tabuleiroPanel.getWidth();
-            int panelHeight = tabuleiroPanel.getHeight();
-            int tabuleiroWidth = SIZE * CELL_SIZE;
-            int tabuleiroHeight = SIZE * CELL_SIZE;
-
-            int startX = (panelWidth - tabuleiroWidth) / 2;
-            int startY = (panelHeight - tabuleiroHeight) / 2;
-
-            int col = (x - startX) / CELL_SIZE;
-            int row = (y - startY) / CELL_SIZE;
-
-            if (col >= 0 && col < SIZE && row >= 0 && row < SIZE) {
-                selectedRow = row;
-                selectedCol = col;
+            int[] coordenadas = converterCoordenada(x, y, tabuleiroPanel);
+            if (coordenadas != null) {
+                selectedRow = coordenadas[0];
+                selectedCol = coordenadas[1];
                 tabuleiroPanel.repaint();  // Repinta o painel para mostrar a seleção
-                System.out.println("Selected cell: (" + row + ", " + col + ")");
+                System.out.println("Selected cell: (" + selectedRow + ", " + selectedCol + ")");
             }
         }
+    }
+
+    private int[] converterCoordenada(int x, int y, TabuleiroPanel tabuleiroPanel) {
+        int panelWidth = tabuleiroPanel.getWidth();
+        int panelHeight = tabuleiroPanel.getHeight();
+        int tabuleiroWidth = SIZE * CELL_SIZE;
+        int tabuleiroHeight = SIZE * CELL_SIZE;
+
+        int startX = (panelWidth - tabuleiroWidth) / 2;
+        int startY = (panelHeight - tabuleiroHeight) / 2;
+
+        int col = (x - startX) / CELL_SIZE;
+        int row = (y - startY) / CELL_SIZE;
+
+        if (col >= 0 && col < SIZE && row >= 0 && row < SIZE) {
+            return new int[]{row, col};
+        }
+        return null;
     }
 
     private void handleShootButton() {
@@ -181,6 +187,11 @@ public class TabuleiroTiro extends JFrame {
                 int resultado = controller.registrarTiro(selectedRow, selectedCol);
                 if (resultado != -1) {
                     player2Shots[selectedRow][selectedCol] = true;
+                    if (resultado > 0) { // Acertou uma embarcação
+                        player2Embarcacoes[selectedRow][selectedCol] = resultado; // Marca o tiro acertado
+                    } else { // Acertou a água
+                        player2Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
+                    }
                     repaint();
                 }
                 selectedRow = -1;
