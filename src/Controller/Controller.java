@@ -26,7 +26,7 @@ public class Controller implements Observer {
         jogador1.addObserver(this);
         jogador2.addObserver(this);
         jogadorAtual = jogador1; // Começa com o jogador 1
-        jogadorAdversario = jogador2;
+        //jogadorAdversario = jogador2;
         currentPlayer = 1;
     }
 
@@ -68,8 +68,15 @@ public class Controller implements Observer {
         }
     }
 
-    public int registrarTiro(int linha, int coluna) {
-        return jogadorAdversario.registrarTiro(linha, coluna);
+    public int registrarTiro(int linha, int coluna, int currentPlayer) {
+        if(currentPlayer==1){
+            jogador1.salvarMatrizEmArquivo("matrizTiro1.txt");
+            return jogador2.registrarTiro(linha,coluna);
+        }
+        else{
+            jogador2.salvarMatrizEmArquivo("matrizTiro2.txt");
+            return jogador1.registrarTiro(linha, coluna);
+        }
     }
 
     public boolean[][] getTiros(int currentPlayer) {

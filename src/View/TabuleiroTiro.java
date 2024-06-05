@@ -21,6 +21,7 @@ public class TabuleiroTiro extends JFrame {
     private int[][] player1Embarcacoes;
     private int[][] player2Embarcacoes;
     private int currentPlayer;
+    private int tirosRestantes;
 
     private TabuleiroPanel player1Tabuleiro;
     private TabuleiroPanel player2Tabuleiro;
@@ -41,6 +42,7 @@ public class TabuleiroTiro extends JFrame {
         player1Embarcacoes = controller.getTabuleiro(1);
         player2Embarcacoes = controller.getTabuleiro(2);
         currentPlayer = 1; // Começa com o jogador 1
+        tirosRestantes = 3; // Cada jogador tem 3 tiros por turno
 
         setTitle("Batalha Naval - Tiros");
         setSize(SIZE * CELL_SIZE * 2 + 100, SIZE * CELL_SIZE + 100);  // Dimensões da janela
@@ -129,13 +131,19 @@ public class TabuleiroTiro extends JFrame {
                     g2d.draw(cell);  // Desenhar o contorno da célula
 
                     if (shots[i][j]) {
-                        if (embarcacoes[i][j] > 0) {
+                        if (embarcacoes[i][j] > 0) {//talvez >
                             g2d.setColor(Color.RED); // Tiro que acertou uma embarcação
+                            g2d.fill(cell);
                         } else if (embarcacoes[i][j] == -10) {
                             g2d.setColor(Color.BLUE); // Tiro na água
+                            g2d.fill(cell);
                         }
+                        System.out.println(embarcacoes[i][j]);
+
+                    } else if (selectedRow == i && selectedCol == j && this == player2Tabuleiro && currentPlayer == 1) {
+                        g2d.setColor(Color.GRAY);
                         g2d.fill(cell);
-                    } else if (selectedRow == i && selectedCol == j && this == player2Tabuleiro) {
+                    } else if (selectedRow == i && selectedCol == j && this == player1Tabuleiro && currentPlayer == 2) {
                         g2d.setColor(Color.GRAY);
                         g2d.fill(cell);
                     }
@@ -148,7 +156,8 @@ public class TabuleiroTiro extends JFrame {
     }
 
     private void handleMouseClick(MouseEvent e, TabuleiroPanel tabuleiroPanel) {
-        if (tabuleiroPanel == player2Tabuleiro) { // Permite clique apenas no tabuleiro do jogador 2
+        if ((currentPlayer == 1 && tabuleiroPanel == player2Tabuleiro) ||
+                (currentPlayer == 2 && tabuleiroPanel == player1Tabuleiro)) { // Permite clique apenas no tabuleiro do oponente
             int x = e.getX();
             int y = e.getY();
 
@@ -183,8 +192,8 @@ public class TabuleiroTiro extends JFrame {
     private void handleShootButton() {
         // Lógica para a ação do botão "Atirar"
         if (selectedRow != -1 && selectedCol != -1) {
-            if (!player2Shots[selectedRow][selectedCol]) { // Verifica se o tiro já foi feito
-                int resultado = controller.registrarTiro(selectedRow, selectedCol);
+            if (currentPlayer == 1 && !player2Shots[selectedRow][selectedCol]) { // Verifica se o tiro já foi feito
+                int resultado = controller.registrarTiro(selectedRow, selectedCol, currentPlayer);
                 if (resultado != -1) {
                     player2Shots[selectedRow][selectedCol] = true;
                     if (resultado > 0) { // Acertou uma embarcação
@@ -193,6 +202,32 @@ public class TabuleiroTiro extends JFrame {
                         player2Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
                     }
                     repaint();
+                }
+                tirosRestantes--;
+                if (tirosRestantes == 0) {
+                    currentPlayer = 2;
+                    tirosRestantes = 3;
+                    JOptionPane.showMessageDialog(this, "Vez do " + player2Name);
+                }
+                selectedRow = -1;
+                selectedCol = -1;
+                System.out.println("Atirou no quadrado selecionado.");
+            } else if (currentPlayer == 2 && !player1Shots[selectedRow][selectedCol]) {
+                int resultado = controller.registrarTiro(selectedRow, selectedCol, currentPlayer);
+                if (resultado != -1) {
+                    player1Shots[selectedRow][selectedCol] = true;
+                    if (resultado > 0) { // Acertou uma embarcação
+                        //player1Embarcacoes[selectedRow][selectedCol] = resultado; // Marca o tiro acertado
+                    } else { // Acertou a água
+                        //player1Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
+                    }
+                    repaint();
+                }
+                tirosRestantes--;
+                if (tirosRestantes == 0) {
+                    currentPlayer = 1;
+                    tirosRestantes = 3;
+                    JOptionPane.showMessageDialog(this, "Vez do " + player1Name);
                 }
                 selectedRow = -1;
                 selectedCol = -1;
@@ -204,5 +239,4 @@ public class TabuleiroTiro extends JFrame {
             System.out.println("Nenhum quadrado selecionado.");
         }
     }
-
 }

@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matriznova1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriznova1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matriznova2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriznova2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jogador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
