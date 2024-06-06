@@ -43,10 +43,10 @@ public class Controller implements Observer {
 
     public boolean inserirNavio(int currentPlayer, int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
         if (currentPlayer == 1) {
-            jogador1.salvarMatrizEmArquivo("matriznova1.txt");
+            jogador2.salvarMatrizEmArquivo("matriz1atirada.txt");
             return jogador1.inserirNavio(tipoNavio, linhaInicial, colunaInicial, orientacao);
         } else {
-            jogador2.salvarMatrizEmArquivo("matriznova2.txt");
+            jogador2.salvarMatrizEmArquivo("matriz2atirada.txt");
             return jogador2.inserirNavio(tipoNavio, linhaInicial, colunaInicial, orientacao);
         }
     }
@@ -70,11 +70,11 @@ public class Controller implements Observer {
 
     public int registrarTiro(int linha, int coluna, int currentPlayer) {
         if(currentPlayer==1){
-            jogador1.salvarMatrizEmArquivo("matrizTiro1.txt");
+            jogador2.salvarMatrizEmArquivo("matrizTiro1.txt");
             return jogador2.registrarTiro(linha,coluna);
         }
         else{
-            jogador2.salvarMatrizEmArquivo("matrizTiro2.txt");
+            jogador1.salvarMatrizEmArquivo("matrizTiro2.txt");
             return jogador1.registrarTiro(linha, coluna);
         }
     }

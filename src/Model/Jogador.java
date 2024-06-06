@@ -70,7 +70,7 @@ public class Jogador extends Observable {
 
     private boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
         if((linhaInicial <0 ) || (linhaInicial>15) || (colunaInicial>15) || (colunaInicial <0 )) {
-           return false;
+            return false;
         }
         else{
             if (tamanho == 3) {

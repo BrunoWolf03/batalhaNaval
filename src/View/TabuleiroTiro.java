@@ -131,14 +131,16 @@ public class TabuleiroTiro extends JFrame {
                     g2d.draw(cell);  // Desenhar o contorno da célula
 
                     if (shots[i][j]) {
-                        if (embarcacoes[i][j] > 0) {//talvez >
-                            g2d.setColor(Color.RED); // Tiro que acertou uma embarcação
-                            g2d.fill(cell);
-                        } else if (embarcacoes[i][j] == -10) {
-                            g2d.setColor(Color.BLUE); // Tiro na água
-                            g2d.fill(cell);
+                        if (embarcacoes[i][j] < 0) {//talvez >
+                            if (embarcacoes[i][j] == -10) {
+                                g2d.setColor(Color.BLUE); // Tiro na água
+                                g2d.fill(cell);
+                            }
+                            else{
+                                g2d.setColor(Color.RED); // Tiro que acertou uma embarcação
+                                g2d.fill(cell);
+                            }
                         }
-                        System.out.println(embarcacoes[i][j]);
 
                     } else if (selectedRow == i && selectedCol == j && this == player2Tabuleiro && currentPlayer == 1) {
                         g2d.setColor(Color.GRAY);
@@ -197,12 +199,17 @@ public class TabuleiroTiro extends JFrame {
                 if (resultado != -1) {
                     player2Shots[selectedRow][selectedCol] = true;
                     if (resultado > 0) { // Acertou uma embarcação
-                        player2Embarcacoes[selectedRow][selectedCol] = resultado; // Marca o tiro acertado
+                        //player2Embarcacoes[selectedRow][selectedCol] = resultado; // Marca o tiro acertado
                     } else { // Acertou a água
-                        player2Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
+                        //player2Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
                     }
                     repaint();
+                    if (checkVictory(player2Embarcacoes)) {
+                        JOptionPane.showMessageDialog(this, player1Name + " venceu!");
+                        System.exit(0);
+                    }
                 }
+
                 tirosRestantes--;
                 if (tirosRestantes == 0) {
                     currentPlayer = 2;
@@ -221,6 +228,10 @@ public class TabuleiroTiro extends JFrame {
                     } else { // Acertou a água
                         //player1Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
                     }
+                    if (checkVictory(player2Embarcacoes)) {
+                        JOptionPane.showMessageDialog(this, player1Name + " venceu!");
+                        System.exit(0);
+                    }
                     repaint();
                 }
                 tirosRestantes--;
@@ -238,5 +249,16 @@ public class TabuleiroTiro extends JFrame {
         } else {
             System.out.println("Nenhum quadrado selecionado.");
         }
+    }
+
+    private boolean checkVictory(int[][] embarcacoes) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (embarcacoes[i][j] > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
