@@ -1,0 +1,94 @@
+Index: matrizTiro1.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>1 0 1 0 1 0 1 0 2 2 0 2 2 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n2 2 0 4 4 4 4 0 5 5 5 5 5 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n4 4 4 4 0 0 3 0 0 0 3 0 0 0 0 \r\n0 0 0 0 0 3 0 3 0 3 0 3 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 3 0 0 0 3 0 0 0 0 0 0 \r\n0 0 0 3 0 3 0 3 0 3 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 3 0 3 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/matrizTiro1.txt b/matrizTiro1.txt
+--- a/matrizTiro1.txt	
++++ b/matrizTiro1.txt	
+@@ -1,15 +1,15 @@
+-1 0 1 0 1 0 1 0 2 2 0 2 2 0 0 
++-1 -10 -1 0 1 0 1 0 2 2 0 2 2 0 0 
++0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
++2 2 0 4 4 4 4 0 4 4 4 4 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-2 2 0 4 4 4 4 0 5 5 5 5 5 0 0 
++5 5 5 5 5 0 0 3 0 0 0 3 0 0 0 
++0 0 0 0 0 0 3 0 3 0 3 0 3 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-4 4 4 4 0 0 3 0 0 0 3 0 0 0 0 
+-0 0 0 0 0 3 0 3 0 3 0 3 0 0 0 
++0 0 3 0 0 0 3 0 0 0 3 0 0 0 0 
++0 3 0 3 0 3 0 3 0 3 0 3 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 0 0 0 3 0 0 0 3 0 0 0 0 0 0 
+-0 0 0 3 0 3 0 3 0 3 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 
+-0 0 0 0 3 0 3 0 0 0 0 0 0 0 0 
++0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Index: matrizTiro2.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>-10 1 -10 1 -10 1 0 1 0 2 2 0 2 2 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 2 2 0 4 4 4 4 0 4 4 4 4 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 5 5 5 5 5 0 0 0 3 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 3 0 3 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 3 0 0 0 3 0 0 0 0 3 0 0 0 0 \r\n0 0 3 0 3 0 3 0 0 3 0 3 0 0 0 \r\n0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 3 0 3 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/matrizTiro2.txt b/matrizTiro2.txt
+--- a/matrizTiro2.txt	
++++ b/matrizTiro2.txt	
+@@ -1,15 +1,15 @@
+ -10 1 -10 1 -10 1 0 1 0 2 2 0 2 2 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 2 2 0 4 4 4 4 0 4 4 4 4 0 0 
++0 2 2 0 0 4 4 4 4 0 4 4 4 4 0 
++0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
++0 5 5 5 5 5 0 0 3 0 0 0 3 0 0 
++0 0 0 0 0 0 0 3 0 3 0 3 0 3 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 5 5 5 5 5 0 0 0 3 0 0 0 0 0 
+-0 0 0 0 0 0 0 0 3 0 3 0 0 0 0 
++0 0 0 3 0 0 0 3 0 0 0 3 0 0 0 
++0 0 3 0 3 0 3 0 3 0 3 0 3 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 3 0 0 0 3 0 0 0 0 3 0 0 0 0 
+-0 0 3 0 3 0 3 0 0 3 0 3 0 0 0 
+-0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 
+-0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 
+-0 0 0 0 0 0 3 0 3 0 0 0 0 0 0 
++0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
++0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"fd179056-6b83-4318-8c10-830c4943ad6a\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/matriznova1.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/matriznova1.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/matriznova2.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/matriznova2.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Controller/Controller.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controller/Controller.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Model/Jogador.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Model/Jogador.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/View/TabuleiroTiro.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/View/TabuleiroTiro.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;BrunoWolf03&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/BrunoWolf03/batalhaNaval.git&quot;,\r\n    &quot;accountId&quot;: &quot;5499d3ab-e6e1-4275-b248-9289f1cdf732&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2fvg6eu8BAQoUYcrADXpWXX3kSG\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Controller.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.InserirNome.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Matriz.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Tabuleiro.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.TabuleiroTiro.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.tabuleiro.executor&quot;: &quot;Run&quot;,\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;JUnit.JogadorTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.RecuperaMatrizTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.SalvadorMatrizTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.TiroTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.View in batalhaNaval.executor&quot;: &quot;Run&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bruno/IdeaProjects/batalhaNaval&quot;,\r\n    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjetosJava/batalhaNaval/testes/src/Main.java&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\ProjetosJava\\batalhaNaval\\testes\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Controller\">\r\n    <configuration name=\"Controller\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Controller.Controller\" />\r\n      <module name=\"batalhaNaval\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Controller.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Model.Main\" />\r\n      <module name=\"batalhaNaval\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Model.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Matriz\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"View.Matriz\" />\r\n      <module name=\"batalhaNaval\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"View.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Tabuleiro\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"View.Tabuleiro\" />\r\n      <module name=\"batalhaNaval\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"View.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TabuleiroTiro\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"View.TabuleiroTiro\" />\r\n      <module name=\"batalhaNaval\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"View.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Controller\" />\r\n        <item itemvalue=\"Application.TabuleiroTiro\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.Tabuleiro\" />\r\n        <item itemvalue=\"Application.Matriz\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"fd179056-6b83-4318-8c10-830c4943ad6a\" name=\"Changes\" comment=\"\" />\r\n      <created>1714686800393</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714686800393</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/testes/src/Main.java</url>\r\n          <line>11</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,11 +6,10 @@
+   <component name="ChangeListManager">
+     <list default="true" id="fd179056-6b83-4318-8c10-830c4943ad6a" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/matriznova1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriznova1.txt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/matriznova2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matriznova2.txt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jogador.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/matrizTiro1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matrizTiro1.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/matrizTiro2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matrizTiro2.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/matriznova1.txt" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/matriznova2.txt" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
