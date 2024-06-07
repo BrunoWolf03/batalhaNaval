@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Controller;
+
 import javax.swing. *;
 import java.awt. *;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 public class InserirNome extends JDialog {
     public String nome1;
     public String nome2;
+    private static InserirNome instance;
 
     public InserirNome(JFrame frame) {
         super(frame, "Inserir Nomes dos Jogadores", true);
@@ -36,5 +39,12 @@ public class InserirNome extends JDialog {
 
         setSize(300, 150);
         setLocationRelativeTo(frame);
+    }
+
+    public static InserirNome getInstance(JFrame frame) {
+        if (instance == null) {
+            instance = new InserirNome(frame);
+        }
+        return instance;
     }
 }

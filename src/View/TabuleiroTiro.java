@@ -22,6 +22,7 @@ public class TabuleiroTiro extends JFrame {
     private int[][] player2Embarcacoes;
     private int currentPlayer;
     private int tirosRestantes;
+    private static TabuleiroTiro instance;
 
     private TabuleiroPanel player1Tabuleiro;
     private TabuleiroPanel player2Tabuleiro;
@@ -81,6 +82,13 @@ public class TabuleiroTiro extends JFrame {
 
         add(tabuleirosPanel, BorderLayout.CENTER);
         add(atirarButton, BorderLayout.SOUTH);
+    }
+
+    public static TabuleiroTiro getInstance(String player1Name, String player2Name, Controller controller) {
+        if (instance == null) {
+            instance = new TabuleiroTiro(player1Name,player2Name,controller);
+        }
+        return instance;
     }
 
     private class TabuleiroPanel extends JPanel {

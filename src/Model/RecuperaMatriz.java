@@ -6,7 +6,7 @@ import java.io.IOException;
 
 class RecuperaMatriz {
 
-    public static int[][] carregarMatriz(String caminhoArquivo) {
+    protected static int[][] carregarMatriz(String caminhoArquivo) {
         int[][] matriz = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {

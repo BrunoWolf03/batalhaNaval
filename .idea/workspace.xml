@@ -6,16 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="fd179056-6b83-4318-8c10-830c4943ad6a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrizTiro1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matrizTiro1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrizTiro2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/matrizTiro2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matriznova1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matriznova2.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Observer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/RecuperaMatriz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/RecuperaMatriz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/SalvadorMatriz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/SalvadorMatriz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Tiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/InserirNome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/InserirNome.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Tabuleiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Tabuleiro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TabuleiroTiro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teste.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

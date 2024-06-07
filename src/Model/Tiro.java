@@ -4,11 +4,11 @@ class Tiro {
 
     private boolean[][] tiros;
 
-    public Tiro(int tamanho) {
+    protected Tiro(int tamanho) {
         this.tiros = new boolean[tamanho][tamanho];
     }
 
-    int atirar(int matriz[][], int linha, int coluna) {
+    protected int atirar(int matriz[][], int linha, int coluna) {
         if(matriz[linha][coluna]>0) {
             if(matriz[linha][coluna]==1) {
                 System.out.println("Acertou um submarino!");

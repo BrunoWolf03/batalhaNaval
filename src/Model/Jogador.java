@@ -2,20 +2,30 @@ package Model;
 
 import java.util.Observable;
 
-public class Jogador extends Observable {
+class Jogador extends Observable {
     int matriz[][];
     int[][] matrizTiro;
     public String nome;
     private Tiro tiros;
 
-    public Jogador() {
+    protected Jogador() {
         this.matriz = new int[15][15];
         this.matrizTiro = new int[15][15];
         cria_tabuleiro();
         this.tiros = new Tiro(15);
     }
 
-    public void cria_tabuleiro() {
+    protected void setNome(String nome) {
+        this.nome = nome;
+        setChanged();
+        notifyObservers();
+    }
+
+    protected String getNome() {
+        return nome;
+    }
+
+    protected void cria_tabuleiro() {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 matriz[i][j] = 0;
@@ -26,7 +36,7 @@ public class Jogador extends Observable {
         notifyObservers();
     }
 
-    public boolean inserirNavio(int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
+    protected boolean inserirNavio(int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
         int tamanho = tipoNavio;
         if ((tamanho > 5) || (tamanho < 1)) {
             System.out.println("Esse tamanho não é válido.");
@@ -68,7 +78,7 @@ public class Jogador extends Observable {
         return true;
     }
 
-    private boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
+    protected boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
         if((linhaInicial <0 ) || (linhaInicial>15) || (colunaInicial>15) || (colunaInicial <0 )) {
             return false;
         }
@@ -119,27 +129,27 @@ public class Jogador extends Observable {
         }
     }
 
-    public int[][] getMatriz() {
+    protected int[][] getMatriz() {
         return matriz;
     }
 
-    public void setMatriz(int[][] matriz) {
+    protected void setMatriz(int[][] matriz) {
         this.matriz = matriz;
         setChanged();
         notifyObservers();
     }
 
-    public void salvarMatrizEmArquivo(String caminhoArquivo) {
+    protected void salvarMatrizEmArquivo(String caminhoArquivo) {
         SalvadorMatriz.salvarMatriz(matriz, caminhoArquivo);
     }
 
-    public void resetTabuleiro() {
+    protected void resetTabuleiro() {
         this.matriz = new int[15][15];
         setChanged();
         notifyObservers();
     }
 
-    public int registrarTiro(int linha, int coluna) {
+    protected int registrarTiro(int linha, int coluna) {
         int resultado = tiros.atirar(getMatriz(), linha, coluna);
         if (resultado != -1) {
             setChanged();
@@ -148,7 +158,7 @@ public class Jogador extends Observable {
         return resultado;
     }
 
-    public boolean[][] getTiros() {
+    protected boolean[][] getTiros() {
         return tiros.getTiros();
     }
 }

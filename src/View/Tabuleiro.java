@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import Model.ModelAPI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,7 @@ public class Tabuleiro extends JFrame {
     private boolean isShipSelected;
     private int currentPlayer;
     private boolean isConfirming;
+    private static Tabuleiro instance;
 
     private Controller controller;
 
@@ -61,6 +63,13 @@ public class Tabuleiro extends JFrame {
         tabuleiroPanel.requestFocusInWindow();
 
         initializeShips();
+    }
+
+    public static Tabuleiro getInstance(String player1Name, String player2Name, Controller controller) {
+        if (instance == null) {
+            instance = new Tabuleiro(player1Name,player2Name,controller);
+        }
+        return instance;
     }
 
     private class TabuleiroPanel extends JPanel {
@@ -197,7 +206,7 @@ public class Tabuleiro extends JFrame {
                         if (!enviarNaviosParaController()) {
                             JOptionPane.showMessageDialog(this, "Erro ao inserir navio. Tente novamente.");
                             isConfirming = false;
-                            controller.resetJogadorTabuleiro(currentPlayer);
+                            controller.resetTabuleiro(currentPlayer);
                         } else {
                             if (currentPlayer == 1) {
                                 currentPlayer = 2;

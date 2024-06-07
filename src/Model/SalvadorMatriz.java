@@ -4,9 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SalvadorMatriz {
+class SalvadorMatriz {
 
-    public static void salvarMatriz(int[][] matriz, String caminhoArquivo) {
+    protected static void salvarMatriz(int[][] matriz, String caminhoArquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo))) {
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz[0].length; j++) {
