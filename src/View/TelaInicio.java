@@ -10,7 +10,16 @@ public class TelaInicio extends JFrame {
     public TelaInicio() {
         // Configurações da janela
         setTitle("Batalha Naval ABG");
-        setSize(800, 600); // Define o tamanho da janela
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        if (gd.isFullScreenSupported()) {
+            gd.setFullScreenWindow(this);
+        } else {
+            System.err.println("Tela cheia não suportada");
+            setSize(800, 600); // tamanho padrão caso a tela cheia não seja suportada
+            setVisible(true);
+        }
+     // Define o tamanho da janela
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centraliza a janela na tela
 
