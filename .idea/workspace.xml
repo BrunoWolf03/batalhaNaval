@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd179056-6b83-4318-8c10-830c4943ad6a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_06_2024_15_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_06_2024_15_06__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2024_13_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2024_13_19__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2024_13_19__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2024_13_19__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matriz1atirada.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matriz2atirada.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrizTiro1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrizTiro2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matriz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/TelaInicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TelaInicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +84,7 @@
       <recent name="D:\ProjetosJava\batalhaNaval\testes" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Controller">
+  <component name="RunManager" selected="Application.TelaInicio">
     <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Controller" />
       <module name="batalhaNaval" />
@@ -157,8 +152,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Controller" />
         <item itemvalue="Application.TelaInicio" />
+        <item itemvalue="Application.Controller" />
         <item itemvalue="Application.TabuleiroTiro" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Tabuleiro" />
