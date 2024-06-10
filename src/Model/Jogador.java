@@ -48,21 +48,41 @@ class Jogador extends Observable {
             return false;
         }
 
-        if (orientacao.equalsIgnoreCase("horizontal")) {
+        if (orientacao.equalsIgnoreCase("leste")) {
             if (tipoNavio == 3) {
                 matriz[linhaInicial][colunaInicial] = 3;
-                matriz[linhaInicial -1 ][colunaInicial + 1] = 3;
-                matriz[linhaInicial ][colunaInicial + 2] = 3;
+                matriz[linhaInicial-1][colunaInicial + 1] = 3;
+                matriz[linhaInicial][colunaInicial + 2] = 3;
             } else {
                 for (int i = 0; i < tamanho; i++) {
                     matriz[linhaInicial][colunaInicial + i] = tipoNavio;
                 }
             }
-        } else if (orientacao.equalsIgnoreCase("vertical")) {
+        } else if (orientacao.equalsIgnoreCase("oeste")) {
             if (tipoNavio == 3) {
                 matriz[linhaInicial][colunaInicial] = 3;
-                matriz[linhaInicial + 1 ][colunaInicial + 1] = 3;
-                matriz[linhaInicial + 2][colunaInicial ] = 3;
+                matriz[linhaInicial + 1][colunaInicial - 1] = 3;
+                matriz[linhaInicial][colunaInicial - 2] = 3;
+            } else {
+                for (int i = 0; i < tamanho; i++) {
+                    matriz[linhaInicial][colunaInicial - i] = tipoNavio;
+                }
+            }
+        } else if (orientacao.equalsIgnoreCase("norte")) {
+            if (tipoNavio == 3) {
+                matriz[linhaInicial][colunaInicial] = 3;
+                matriz[linhaInicial-1][colunaInicial - 1] = 3;
+                matriz[linhaInicial - 2][colunaInicial] = 3;
+            } else {
+                for (int i = 0; i < tamanho; i++) {
+                    matriz[linhaInicial - i][colunaInicial] = tipoNavio;
+                }
+            }
+        } else if (orientacao.equalsIgnoreCase("sul")) {
+            if (tipoNavio == 3) {
+                matriz[linhaInicial][colunaInicial] = 3;
+                matriz[linhaInicial + 1][colunaInicial+1] = 3;
+                matriz[linhaInicial + 2][colunaInicial] = 3;
             } else {
                 for (int i = 0; i < tamanho; i++) {
                     matriz[linhaInicial + i][colunaInicial] = tipoNavio;
@@ -78,6 +98,7 @@ class Jogador extends Observable {
         return true;
     }
 
+
     protected boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
         // Verificar se a posição inicial está dentro dos limites
         if ((linhaInicial < 0) || (linhaInicial >= 15) || (colunaInicial >= 15) || (colunaInicial < 0)) {
@@ -85,11 +106,19 @@ class Jogador extends Observable {
         }
 
         // Verificar se a embarcação está completamente dentro dos limites
-        if (orientacao.equalsIgnoreCase("horizontal")) {
+        if (orientacao.equalsIgnoreCase("leste")) {
             if (colunaInicial + tamanho > 15) {
                 return false;
             }
-        } else if (orientacao.equalsIgnoreCase("vertical")) {
+        } else if (orientacao.equalsIgnoreCase("oeste")) {
+            if (colunaInicial - tamanho < 0) {
+                return false;
+            }
+        } else if (orientacao.equalsIgnoreCase("norte")) {
+            if (linhaInicial - tamanho < 0) {
+                return false;
+            }
+        } else if (orientacao.equalsIgnoreCase("sul")) {
             if (linhaInicial + tamanho > 15) {
                 return false;
             }
@@ -98,13 +127,25 @@ class Jogador extends Observable {
         }
 
         // Verificar se todas as células da embarcação estão vazias
-        if (orientacao.equalsIgnoreCase("horizontal")) {
+        if (orientacao.equalsIgnoreCase("leste")) {
             for (int i = 0; i < tamanho; i++) {
                 if (matriz[linhaInicial][colunaInicial + i] != 0) {
                     return false;
                 }
             }
-        } else if (orientacao.equalsIgnoreCase("vertical")) {
+        } else if (orientacao.equalsIgnoreCase("oeste")) {
+            for (int i = 0; i < tamanho; i++) {
+                if (matriz[linhaInicial][colunaInicial - i] != 0) {
+                    return false;
+                }
+            }
+        } else if (orientacao.equalsIgnoreCase("norte")) {
+            for (int i = 0; i < tamanho; i++) {
+                if (matriz[linhaInicial - i][colunaInicial] != 0) {
+                    return false;
+                }
+            }
+        } else if (orientacao.equalsIgnoreCase("sul")) {
             for (int i = 0; i < tamanho; i++) {
                 if (matriz[linhaInicial + i][colunaInicial] != 0) {
                     return false;
@@ -115,15 +156,8 @@ class Jogador extends Observable {
         // Verificar as células vizinhas
         for (int i = -1; i <= tamanho; i++) {
             for (int j = -1; j <= 1; j++) {
-                int linha = linhaInicial + (orientacao.equalsIgnoreCase("horizontal") ? 0 : i);
-                int coluna = colunaInicial + (orientacao.equalsIgnoreCase("horizontal") ? i : 0);
-                if (orientacao.equalsIgnoreCase("horizontal")) {
-                    linha = linhaInicial + j;
-                    coluna = colunaInicial + i;
-                } else {
-                    linha = linhaInicial + i;
-                    coluna = colunaInicial + j;
-                }
+                int linha = linhaInicial + (orientacao.equalsIgnoreCase("leste") ? 0 : (orientacao.equalsIgnoreCase("oeste") ? 0 : (orientacao.equalsIgnoreCase("norte") ? -i : i)));
+                int coluna = colunaInicial + (orientacao.equalsIgnoreCase("leste") ? i : (orientacao.equalsIgnoreCase("oeste") ? -i : (orientacao.equalsIgnoreCase("norte") ? 0 : 0)));
                 if (linha >= 0 && linha < 15 && coluna >= 0 && coluna < 15) {
                     if (matriz[linha][coluna] != 0) {
                         return false;
@@ -134,6 +168,7 @@ class Jogador extends Observable {
 
         return true;
     }
+
 
 
     protected int[][] getMatriz() {
