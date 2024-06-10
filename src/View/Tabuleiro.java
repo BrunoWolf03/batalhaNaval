@@ -194,6 +194,7 @@ public class Tabuleiro extends JFrame {
         }
     }
 
+
     private void handleKeyPress(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (!isConfirming) {
@@ -236,7 +237,19 @@ public class Tabuleiro extends JFrame {
             String coordenadaInicial = ship.getCoordenadaInicial(startX, startY);
             int[] coordenada = converterCoordenada(coordenadaInicial);
             if (coordenada != null) {
-                String orientacao = ship.getOrientacao() == 0 ? "horizontal" : "vertical";
+                String orientacao;
+                if (ship.getOrientacao() == 0) {
+                    orientacao = "leste";
+                } else if (ship.getOrientacao() == 1) {
+                    orientacao = "sul";
+                } else if (ship.getOrientacao() == 2) {
+                    orientacao = "oeste";
+                } else if (ship.getOrientacao() == 3) {
+                    orientacao = "norte";
+                } else {
+                    orientacao = "leste"; // Orientação padrão
+                }
+
                 if (!controller.inserirNavio(currentPlayer, ship.getTipoNavio(), coordenada[0], coordenada[1], orientacao)) {
                     ship.setErrored(true); // Marcar navio com erro
                     selectedShip = ship;
@@ -253,6 +266,7 @@ public class Tabuleiro extends JFrame {
         repaint();
         return true; // Todos os navios foram inseridos corretamente
     }
+
 
     private int[] converterCoordenada(String coordenada) {
         if (coordenada.length() < 2) {
