@@ -9,6 +9,7 @@ import View.TelaInicio;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.Observer;
 
 public class Controller implements Observer {
@@ -42,7 +43,10 @@ public class Controller implements Observer {
     }
 
     public boolean inserirNavio(int jogador, int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
-        model.salvarMatriz(jogador,"matriz.txt");
+        if(jogador==1)
+            model.salvarMatriz(jogador,"matriz1.txt");
+        else
+            model.salvarMatriz(jogador,"matriz2.txt");
         return model.inserirNavio(jogador, tipoNavio, linhaInicial, colunaInicial, orientacao);
     }
 
@@ -66,6 +70,14 @@ public class Controller implements Observer {
         model.salvarMatriz(jogador, fileName);
     }
 
+    private static void processarArquivos(File file1, File file2,Controller controller) {
+        // Adicione aqui a lógica para processar os arquivos
+
+        // Exemplo de criação da tela de TabuleiroTiro
+        TabuleiroTiro tabuleiroTiro = new TabuleiroTiro("mock1","mock2",controller);
+        tabuleiroTiro.setVisible(true);
+    }
+
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
@@ -73,7 +85,7 @@ public class Controller implements Observer {
             TelaInicio telaInicio = new TelaInicio();
             telaInicio.setVisible(true);
 
-            telaInicio.getBtnIniciarJogo().addActionListener(e -> {
+            telaInicio.getStartButton().addActionListener(e -> { // Caso eu selecione a opção de Iniciar um novo jogo
                 JFrame panel = new JFrame();
                 InserirNome gui = InserirNome.getInstance(panel);
                 gui.setVisible(true);
@@ -101,6 +113,22 @@ public class Controller implements Observer {
                 System.out.println("Nomes dos jogadores não inseridos corretamente.");
             }
         });
+            telaInicio.getLoadButton().addActionListener(e -> { // Caso eu selecione a opção de carregar
+                Controller controller = getInstance();
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setMultiSelectionEnabled(true);
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File[] selectedFiles = fileChooser.getSelectedFiles();
+                    if (selectedFiles.length == 2) {
+                        // Processar os arquivos e ir para a etapa de TabuleiroTiro
+                        processarArquivos(selectedFiles[0], selectedFiles[1], controller);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor, selecione exatamente dois arquivos.");
+                    }
+                }
+            });
         });
     }
 }
+

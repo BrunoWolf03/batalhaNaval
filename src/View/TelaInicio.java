@@ -59,9 +59,13 @@ public class TelaInicio extends JFrame {
             }
         });
     }
-    public JButton getBtnIniciarJogo() {
+    public JButton getStartButton() {
 
         return startButton;
+    }
+
+    public JButton getLoadButton() {
+        return loadButton;
     }
 }
 
