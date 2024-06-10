@@ -239,8 +239,8 @@ public class TabuleiroTiro extends JFrame {
                     } else { // Acertou a água
                         //player1Embarcacoes[selectedRow][selectedCol] = -10; // Marca tiro na água
                     }
-                    if (checkVictory(player2Embarcacoes)) {
-                        JOptionPane.showMessageDialog(this, player1Name + " venceu!");
+                    if (checkVictory(player1Embarcacoes)) {
+                        JOptionPane.showMessageDialog(this, player2Name + " venceu!");
                         System.exit(0);
                     }
                     repaint();
