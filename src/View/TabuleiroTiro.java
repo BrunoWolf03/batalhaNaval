@@ -47,7 +47,10 @@ public class TabuleiroTiro extends JFrame {
 
         setTitle("Batalha Naval - Tiros");
         setSize(SIZE * CELL_SIZE * 2 + 100, SIZE * CELL_SIZE + 100);  // Dimensões da janela
+        setUndecorated(true); // Remove a barra de título
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximiza a janela
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
         setLocationRelativeTo(null);
 
         player1Tabuleiro = new TabuleiroPanel(player1Shots, player1Embarcacoes, "Tabuleiro de " + player1Name);

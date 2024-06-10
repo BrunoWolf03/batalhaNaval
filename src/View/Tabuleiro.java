@@ -42,7 +42,10 @@ public class Tabuleiro extends JFrame {
 
         setTitle("Batalha Naval");
         setSize(SIZE * CELL_SIZE + 300, SIZE * CELL_SIZE + 70);
+        setUndecorated(true); // Remove a barra de título
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximiza a janela
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
         setLocationRelativeTo(null);
 
         TabuleiroPanel tabuleiroPanel = new TabuleiroPanel();
