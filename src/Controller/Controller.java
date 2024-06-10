@@ -4,6 +4,7 @@ import Model.ModelAPI;
 import View.InserirNome;
 import View.Tabuleiro;
 import View.TabuleiroTiro;
+import View.TelaInicio;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -66,12 +67,19 @@ public class Controller implements Observer {
     }
 
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(() -> {
-            JFrame panel = new JFrame();
-            InserirNome gui = InserirNome.getInstance(panel);
-            gui.setVisible(true);
+            // Criação da tela inicial
+            TelaInicio telaInicio = new TelaInicio();
+            telaInicio.setVisible(true);
+
+            telaInicio.getBtnIniciarJogo().addActionListener(e -> {
+                JFrame panel = new JFrame();
+                InserirNome gui = InserirNome.getInstance(panel);
+                gui.setVisible(true);
 
             if (gui.nome1 != null && gui.nome2 != null) {
+
                 ModelAPI.getInstance().setNome(1, gui.nome1);
                 ModelAPI.getInstance().setNome(2, gui.nome2);
 
@@ -92,6 +100,7 @@ public class Controller implements Observer {
             } else {
                 System.out.println("Nomes dos jogadores não inseridos corretamente.");
             }
+        });
         });
     }
 }

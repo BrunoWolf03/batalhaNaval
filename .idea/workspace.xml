@@ -7,7 +7,6 @@
     <list default="true" id="fd179056-6b83-4318-8c10-830c4943ad6a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matriz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/TelaInicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/TelaInicio.java" afterDir="false" />
     </list>
@@ -84,7 +83,7 @@
       <recent name="D:\ProjetosJava\batalhaNaval\testes" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TelaInicio">
+  <component name="RunManager" selected="Application.Controller">
     <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Controller" />
       <module name="batalhaNaval" />
@@ -152,8 +151,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TelaInicio" />
         <item itemvalue="Application.Controller" />
+        <item itemvalue="Application.TelaInicio" />
         <item itemvalue="Application.TabuleiroTiro" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Tabuleiro" />

@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 
 public class TelaInicio extends JFrame {
 
+    private JButton startButton;
+    private JButton loadButton;
+
     public TelaInicio() {
         // Configurações da janela
         setTitle("Batalha Naval ABG");
@@ -22,8 +25,8 @@ public class TelaInicio extends JFrame {
         imageLabel.setLayout(new GridBagLayout()); // Define o layout para centralizar os botões
 
         // Cria os botões
-        JButton startButton = new JButton("Iniciar jogo");
-        JButton loadButton = new JButton("Carregar jogo");
+        startButton = new JButton("Iniciar jogo");
+        loadButton = new JButton("Carregar jogo");
 
         // Define as configurações do layout para centralizar os botões
         GridBagConstraints gbc = new GridBagConstraints();
@@ -43,7 +46,7 @@ public class TelaInicio extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Código para iniciar o jogo
+                setVisible(false);
                 System.out.println("Iniciar jogo clicado!");
             }
         });
@@ -51,20 +54,14 @@ public class TelaInicio extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Código para carregar o jogo
+
                 System.out.println("Carregar jogo clicado!");
             }
         });
     }
+    public JButton getBtnIniciarJogo() {
 
-    public static void main(String[] args) {
-        // Cria e exibe a janela
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TelaInicio().setVisible(true);
-            }
-        });
+        return startButton;
     }
 }
 
