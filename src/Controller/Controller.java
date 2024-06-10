@@ -41,6 +41,7 @@ public class Controller implements Observer {
     }
 
     public boolean inserirNavio(int jogador, int tipoNavio, int linhaInicial, int colunaInicial, String orientacao) {
+        model.salvarMatriz(jogador,"matriz");
         return model.inserirNavio(jogador, tipoNavio, linhaInicial, colunaInicial, orientacao);
     }
 

@@ -79,55 +79,62 @@ class Jogador extends Observable {
     }
 
     protected boolean posicaoDisponivel(int linhaInicial, int colunaInicial, int tamanho, String orientacao) {
-        if((linhaInicial <0 ) || (linhaInicial>15) || (colunaInicial>15) || (colunaInicial <0 )) {
+        // Verificar se a posição inicial está dentro dos limites
+        if ((linhaInicial < 0) || (linhaInicial >= 15) || (colunaInicial >= 15) || (colunaInicial < 0)) {
             return false;
         }
-        else{
-            if (tamanho == 3) {
-                if ((linhaInicial == 0) || (colunaInicial == 0) || (linhaInicial == 15) || (colunaInicial == 15)) {
-                    System.out.println("Nao pode colocar hidroaviao na borda.");
-                    return false;
-                }
-                if (colunaInicial + tamanho > 15) {
-                    return false;
-                }
-            }
-            if (orientacao.equalsIgnoreCase("horizontal")) {
-                if (colunaInicial + tamanho > 15) {
-                    return false;
-                }
-                for (int i = 0; i < tamanho; i++) {
-                    if (matriz[linhaInicial][colunaInicial + i] != 0) {
-                        return false;
-                    }
-                }
-            } else if (orientacao.equalsIgnoreCase("vertical")) {
-                if (linhaInicial + tamanho > 15) {
-                    return false;
-                }
-                for (int i = 0; i < tamanho; i++) {
-                    if (matriz[linhaInicial + i][colunaInicial] != 0) {
-                        return false;
-                    }
-                }
-            }
-            for (int i = 0; i < tamanho; i++) {
-                for (int j = 0; j < 3; j++) {
-                    for (int k = 0; k < 3; k++) {
-                        if ((linhaInicial - 1 + j > 15) || (colunaInicial - 1 + k > 15) || (linhaInicial - 1 + j < 0) || (colunaInicial - 1 + k < 0)) {
-                            System.out.println("Esta fora da matriz");
-                        } else {
-                            if (matriz[linhaInicial - 1 + j][colunaInicial - 1 + k] != 0) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
 
-            return true;
+        // Verificar se a embarcação está completamente dentro dos limites
+        if (orientacao.equalsIgnoreCase("horizontal")) {
+            if (colunaInicial + tamanho > 15) {
+                return false;
+            }
+        } else if (orientacao.equalsIgnoreCase("vertical")) {
+            if (linhaInicial + tamanho > 15) {
+                return false;
+            }
+        } else {
+            return false; // Orientação inválida
         }
+
+        // Verificar se todas as células da embarcação estão vazias
+        if (orientacao.equalsIgnoreCase("horizontal")) {
+            for (int i = 0; i < tamanho; i++) {
+                if (matriz[linhaInicial][colunaInicial + i] != 0) {
+                    return false;
+                }
+            }
+        } else if (orientacao.equalsIgnoreCase("vertical")) {
+            for (int i = 0; i < tamanho; i++) {
+                if (matriz[linhaInicial + i][colunaInicial] != 0) {
+                    return false;
+                }
+            }
+        }
+
+        // Verificar as células vizinhas
+        for (int i = -1; i <= tamanho; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int linha = linhaInicial + (orientacao.equalsIgnoreCase("horizontal") ? 0 : i);
+                int coluna = colunaInicial + (orientacao.equalsIgnoreCase("horizontal") ? i : 0);
+                if (orientacao.equalsIgnoreCase("horizontal")) {
+                    linha = linhaInicial + j;
+                    coluna = colunaInicial + i;
+                } else {
+                    linha = linhaInicial + i;
+                    coluna = colunaInicial + j;
+                }
+                if (linha >= 0 && linha < 15 && coluna >= 0 && coluna < 15) {
+                    if (matriz[linha][coluna] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
+
 
     protected int[][] getMatriz() {
         return matriz;
