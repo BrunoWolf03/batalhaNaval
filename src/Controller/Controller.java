@@ -67,17 +67,11 @@ public class Controller implements Observer {
         return model.getTabuleiro(jogador);
     }
 
-    public void salvarMatriz(int jogador, String fileName) {
-        model.salvarMatriz(jogador, fileName);
-    }
-
-    public void salvaroJogo(int[][] matriz1, int[][] matriz2) {
+    public void salvaroJogo() {
 
             model.salvarMatriz(1, "matriz1.txt");
             model.salvarMatriz(2, "matriz2.txt");
     }
-
-
 
     private static void processarArquivos(File file1, File file2,Controller controller, String nome1, String nome2) {
         // Adicione aqui a lógica para processar os arquivos
@@ -122,18 +116,22 @@ public class Controller implements Observer {
             }
         });
             telaInicio.getLoadButton().addActionListener(e -> { // Caso eu selecione a opção de carregar
-                Controller controller = getInstance();
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setMultiSelectionEnabled(true);
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File[] selectedFiles = fileChooser.getSelectedFiles();
                     if (selectedFiles.length == 2) {
-                        // Processar os arquivos e ir para a etapa de TabuleiroTiro
+
                         JFrame panel = new JFrame();
+                        Controller controller = getInstance();
                         InserirNome gui = InserirNome.getInstance(panel);
                         gui.setVisible(true);
                         processarArquivos(selectedFiles[0], selectedFiles[1], controller, gui.nome1, gui.nome2);
+                        SwingUtilities.invokeLater(() -> {
+                            TabuleiroTiro gui2 = TabuleiroTiro.getInstance(gui.nome1, gui.nome2, controller);
+                            gui2.setVisible(true);
+                        });
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor, selecione exatamente dois arquivos.");
                     }

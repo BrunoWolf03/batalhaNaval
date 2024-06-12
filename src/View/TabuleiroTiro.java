@@ -281,18 +281,23 @@ public class TabuleiroTiro extends JFrame {
     }
 
     private void handleSaveButton() {
-        controller.salvaroJogo(player1Embarcacoes, player2Embarcacoes);
+        controller.salvaroJogo();
         JOptionPane.showMessageDialog(this, "Jogo salvo!");
     }
 
     private boolean checkVictory(int[][] embarcacoes) {
+        System.out.println("Verificando vitória...");
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
+                System.out.print(embarcacoes[i][j] + " ");
                 if (embarcacoes[i][j] > 0) {
+                    System.out.println("\nAinda há embarcações restantes.");
                     return false;
                 }
             }
+            System.out.println();
         }
+        System.out.println("Nenhuma embarcação restante. Vitória!");
         return true;
     }
 }
