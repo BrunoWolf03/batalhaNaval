@@ -27,6 +27,7 @@ public class TabuleiroTiro extends JFrame {
     private TabuleiroPanel player1Tabuleiro;
     private TabuleiroPanel player2Tabuleiro;
     private JButton atirarButton;
+    private JButton salvarButton;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
@@ -78,18 +79,32 @@ public class TabuleiroTiro extends JFrame {
             }
         });
 
+        salvarButton = new JButton("Salvar");
+        salvarButton.setPreferredSize(new Dimension(100, 50)); // Define o tamanho do botão "Salvar"
+        salvarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleSaveButton();
+            }
+        });
+
         setLayout(new BorderLayout());
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(salvarButton, BorderLayout.EAST);
+
         JPanel tabuleirosPanel = new JPanel(new GridLayout(1, 2));
         tabuleirosPanel.add(player1Tabuleiro);
         tabuleirosPanel.add(player2Tabuleiro);
 
+        add(topPanel, BorderLayout.NORTH);
         add(tabuleirosPanel, BorderLayout.CENTER);
         add(atirarButton, BorderLayout.SOUTH);
     }
 
     public static TabuleiroTiro getInstance(String player1Name, String player2Name, Controller controller) {
         if (instance == null) {
-            instance = new TabuleiroTiro(player1Name,player2Name,controller);
+            instance = new TabuleiroTiro(player1Name, player2Name, controller);
         }
         return instance;
     }
@@ -142,12 +157,11 @@ public class TabuleiroTiro extends JFrame {
                     g2d.draw(cell);  // Desenhar o contorno da célula
 
                     if (shots[i][j]) {
-                        if (embarcacoes[i][j] < 0) {//talvez >
+                        if (embarcacoes[i][j] < 0) {
                             if (embarcacoes[i][j] == -10) {
                                 g2d.setColor(Color.BLUE); // Tiro na água
                                 g2d.fill(cell);
-                            }
-                            else{
+                            } else {
                                 g2d.setColor(Color.RED); // Tiro que acertou uma embarcação
                                 g2d.fill(cell);
                             }
@@ -164,7 +178,11 @@ public class TabuleiroTiro extends JFrame {
             }
 
             // Desenhar nome do jogador
-            g2d.drawString(playerName, 10, 20);
+            int nameYPosition = startY + tabuleiroHeight - 500;
+
+                int nameWidth = g2d.getFontMetrics().stringWidth(playerName);
+
+                g2d.drawString(playerName, startX, nameYPosition);
         }
     }
 
@@ -260,6 +278,11 @@ public class TabuleiroTiro extends JFrame {
         } else {
             System.out.println("Nenhum quadrado selecionado.");
         }
+    }
+
+    private void handleSaveButton() {
+        controller.salvaroJogo(player1Embarcacoes, player2Embarcacoes);
+        JOptionPane.showMessageDialog(this, "Jogo salvo!");
     }
 
     private boolean checkVictory(int[][] embarcacoes) {

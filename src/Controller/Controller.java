@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+
 import java.util.Observer;
 
 public class Controller implements Observer {
@@ -70,11 +71,18 @@ public class Controller implements Observer {
         model.salvarMatriz(jogador, fileName);
     }
 
-    private static void processarArquivos(File file1, File file2,Controller controller) {
+    public void salvaroJogo(int[][] matriz1, int[][] matriz2) {
+
+            model.salvarMatriz(1, "matriz1.txt");
+            model.salvarMatriz(2, "matriz2.txt");
+    }
+
+
+
+    private static void processarArquivos(File file1, File file2,Controller controller, String nome1, String nome2) {
         // Adicione aqui a lógica para processar os arquivos
 
-        // Exemplo de criação da tela de TabuleiroTiro
-        TabuleiroTiro tabuleiroTiro = new TabuleiroTiro("mock1","mock2",controller);
+        TabuleiroTiro tabuleiroTiro = new TabuleiroTiro(nome1,nome2,controller);
         tabuleiroTiro.setVisible(true);
     }
 
@@ -122,7 +130,10 @@ public class Controller implements Observer {
                     File[] selectedFiles = fileChooser.getSelectedFiles();
                     if (selectedFiles.length == 2) {
                         // Processar os arquivos e ir para a etapa de TabuleiroTiro
-                        processarArquivos(selectedFiles[0], selectedFiles[1], controller);
+                        JFrame panel = new JFrame();
+                        InserirNome gui = InserirNome.getInstance(panel);
+                        gui.setVisible(true);
+                        processarArquivos(selectedFiles[0], selectedFiles[1], controller, gui.nome1, gui.nome2);
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor, selecione exatamente dois arquivos.");
                     }
